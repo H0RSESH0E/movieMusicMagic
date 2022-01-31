@@ -1,0 +1,104 @@
+:root {
+
+    /*Fonts*/
+    --1-headline-font: cache;
+    --1-font-size: calc( (( var(--swf) + var(--shf))/2) * 48px);
+    --1-font-color: #fff;
+
+    --2-body-font: avenir;
+    --2-font-size: calc( (( var(--swf) + var(--shf))/2) * 14px);
+    --2-font-color: #0f1031;
+
+    --shadow: 2px 2px 4px #0f1031, 2px 2px 6px #0f1031, 2px 2px 7px #0f1031;
+
+    /* Backgrounds and borders */
+    --1-bg-color: #243e90;
+    --1-border-colour: #000;
+    --2-bg-color: #b4b6b949;
+    --2-border-color: #ffffff91;
+
+
+    /* Mobile First (latest iPhone First) Parameters */
+    --swf: calc(375/375); /* Screen Width Factor */
+    --shf: calc(812/812); /* Screen Height Factor */
+
+    /* Dynamically adjusted sizing for non-flex containers */
+    --iconS-size:  calc( (( var(--swf) + var(--shf))/2) * 35px);
+  
+}
+
+* {
+    border: 2px dotted rgba(255, 255, 0, 0.5);
+    background-color: rgba(187, 50, 205, 0.123);
+} 
+  
+@font-face {
+    font-family: 'cache';
+    src:  url('./Cache-Regular.ttf') format('truetype');
+  } 
+
+@font-face {
+    font-family: 'avenir';
+    src: url('./AvenirLTStd-Roman.otf');
+}
+
+html,
+body {
+    scroll-behavior: smooth;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+
+    font-family: var(--2-body-font);
+    font-size: var(--2-font-size);
+    color: var(--2-font-color);
+}    
+
+                                        /* RESPONSIVE STYLING */
+
+@media (max-width: 350px) and (max-height: 750px) {
+
+    :root {
+        --swf: calc(320/375); /* Screen Width Factor */
+        --shf: calc(568/812); /* Screen Height Factor */
+    }
+}
+
+@media (min-width: 450px) and (max-height: 450px) {
+
+    :root {
+        --swf: calc(450/375); /* Screen Width Factor */
+        --shf: calc(320/812); /* Screen Height Factor */
+    }
+}
+
+@media (min-width: 550px) and (min-height: 570px) { 
+
+    :root {
+        --swf: calc(768/375); /* Screen Width Factor */
+        --shf: calc(812/812); /* Screen Height Factor */
+    }
+}
+
+@media (min-width: 780px)  {
+   
+}
+
+@media (min-width: 1000px) and (max-height: 650px) {
+   
+}
+
+@media (min-width: 1000px) and (min-height: 650px) {
+   
+}
+
+@media (min-width: 1000px) and (max-height: 1500px) and (min-height: 700px) {
+ 
+}
+
+@media (min-width: 1400px) and (max-height: 2000px) {
+
+}
+
+@media (min-width: 2000px) {
+    
+}
