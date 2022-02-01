@@ -2,6 +2,10 @@ var soundtrackContainerEl = document.querySelector('#soundtrack-container');
 var bigContainer = document.querySelector("#main-container")
 var artworkContainerEl = document.createElement("div");
 
+// Variable Declarations
+var spotifyToken;
+
+
 var searchForm = document.createElement("form")
 var inputField = document.createElement("input");
 var submitButton = document.createElement("button")
@@ -17,40 +21,17 @@ bigContainer.appendChild(artworkContainerEl);
 var formSubmitHandler = function (event) {
 
     event.preventDefault();
-        var showName = inputField.value.trim();
-        if (showName) {
-            getOmdbData(showName);
-            artworkContainerEl.textContent = '';
-            inputField.value = '';
-        } 
-        else {
-            // modal alert
+    var showName = inputField.value.trim();
+    if (showName) {
+        getOmdbData(showName);
+        artworkContainerEl.textContent = '';
+        inputField.value = '';
+    }
+    else {
+        // modal alert
     }
 };
 
-
-// This function will fetch from the Spotify API
-var getShowSoundtrack = function (showName) {
-    var apiUrl = '//fill this in' + showName + '//fill this in';
-
-    // make a get request to url
-    fetch(apiUrl)
-        .then(function (response) {
-            // request was successful
-            if (response.ok) {
-                console.log(response);
-                response.json().then(function (data) {
-                    console.log(data);
-                    displaySoundtrack(data, showName);
-                });
-            } else {
-                alert('Error: ' + response.statusText);
-            }
-        })
-        .catch(function (error) {
-            //modal alert needed
-        });
-};
 
 // This function sppends the dynamically created elemnents to the page
 var displayOmdb = function (movieData) {
@@ -128,5 +109,35 @@ var getOmdbData = function (showName) {
         });
 };
 
+// This function will fetch from the Spotify API
+var getSpotifyToken = function (showName) {
+    var clientId = "c0c739d14fa7455c845f2543a0bdd7a2";
+    var clientSecret = "3892b03191084834a523304de30afb9f";
+
+    var tokenApi = "https://accounts.spotify.com/api/token";
+
+    fetch(tokenApi, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + btoa(clientId + ":" + clientSecret)
+        },
+        body: 'grant_type=client_credentials'
+    })
+        .then(function(response) {
+        return response.json();
+    })
+    .then (function(data) {
+        spotifyToken = data.access_token;
+        console.log(spotifyToken);
+    });
+
+};
+
+
+var spotifyApiUrl = 'https://api.spotify.com/v1';
+
+
+getSpotifyToken ();
 // add event listeners to forms
 searchForm.addEventListener('submit', formSubmitHandler);
