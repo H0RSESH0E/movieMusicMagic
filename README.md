@@ -26,7 +26,7 @@ See it online now at: [https://h0rsesh0e.github.io/movieMusicMagic/]
 This is my fourth project in the Coding Boot Camp provided by [The School of Continuing Studies, University of Toronto](https://learn.utoronto.ca/) and [Trilogy Education Services](https://www.trilogyed.com/). 
 
 ## License
-All content excluding typefaces, registered trade marks and the publicly licensed background image is the exclusive property of David Baron and or Tirlogy Education Services and or The School of Continuing Studies, University of Toronto.
+All content excluding typefaces, registered trade marks and the publicly licensed background image is the exclusive property of The Pink Elephants and or Tirlogy Education Services and or The School of Continuing Studies, University of Toronto.
 
 ## Features
 What features?
