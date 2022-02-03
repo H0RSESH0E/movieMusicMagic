@@ -4,7 +4,7 @@ var artworkContainerEl = document.createElement("div");
 
 // Variable Declarations
 var spotifyToken;
-
+var searchTerm;
 
 var searchForm = document.createElement("form")
 var inputField = document.createElement("input");
@@ -21,11 +21,12 @@ bigContainer.appendChild(artworkContainerEl);
 var formSubmitHandler = function (event) {
 
     event.preventDefault();
-    var showName = inputField.value.trim();
-    if (showName) {
-        getOmdbData(showName);
-        artworkContainerEl.textContent = '';
-        inputField.value = '';
+    searchTerm = inputField.value.trim();
+    if (searchTerm) {
+        getOmdbData(searchTerm);
+        getSpotifyData (spotifyToken, searchTerm)
+        // artworkContainerEl.textContent = '';
+        // inputField.value = '';
     }
     else {
         // modal alert
@@ -164,28 +165,31 @@ var getSpotifyData = function (token, searchString) {
     fetch(spotifyApiUrl, {
         method: 'GET',
             headers:{ "Authorization": 'Bearer ' + token},
-            // data: {
-            //     q: searchString,
-            //     type: 'album'
-            // },
-        
+            
     })
         .then(function(response) {
         return response.json();
     })
     .then (function(data) {
         console.log(data);
+        var urlToPass = data.albums.items[0].external_urls.spotify;
+        console.log("This is the first URL2PASS: ", urlToPass);
+        displayFirstSearchResult(urlToPass)
     });
 }
 
-
+var displayFirstSearchResult = function (urlToPass) {
+    console.log("THis is the 2nd: ",urlToPass);
+    var urlToClick = document.createElement("a");
+    urlToClick.textContent = urlToPass;
+    urlToClick.setAttribute("href", urlToPass);
+    urlToClick.setAttribute("target", "_blank");
+    artworkContainerEl.appendChild(urlToClick);
+}
 
 
 getSpotifyToken ();
 
-var x = setTimeout(function(){
-    getSpotifyData (spotifyToken, "Scarface Original Soundtrack")
-}, 5000);
 
 // add event listeners to forms
 searchForm.addEventListener('submit', formSubmitHandler);
