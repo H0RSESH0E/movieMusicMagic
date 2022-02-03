@@ -5,6 +5,9 @@ var artworkContainerEl = document.createElement("div");
 // Variable Declarations
 var spotifyToken;
 var searchTerm;
+var completed1;
+var completed2;
+
 
 var searchForm = document.createElement("form")
 var inputField = document.createElement("input");
@@ -21,12 +24,14 @@ bigContainer.appendChild(artworkContainerEl);
 var formSubmitHandler = function (event) {
 
     event.preventDefault();
+
     searchTerm = inputField.value.trim();
+    artworkContainerEl.textContent = '';
+    inputField.value = '';
+    
     if (searchTerm) {
         getOmdbData(searchTerm);
-        getSpotifyData (spotifyToken, searchTerm)
-        // artworkContainerEl.textContent = '';
-        // inputField.value = '';
+        getSpotifyData(spotifyToken, searchTerm)
     }
     else {
         // modal alert
@@ -125,13 +130,13 @@ var getSpotifyToken = function () {
         },
         body: 'grant_type=client_credentials'
     })
-        .then(function(response) {
-        return response.json();
-    })
-    .then (function(data) {
-        spotifyToken = data.access_token;
-        console.log(spotifyToken);
-    });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            spotifyToken = data.access_token;
+            console.log(spotifyToken);
+        });
 
 };
 
@@ -160,35 +165,42 @@ var searchAlbums = function (query) {
 
 
 var getSpotifyData = function (token, searchString) {
-    var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString +'&type=album' ;
+    var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString + ' Original%20Motion%20Picture&type=album';
 
     fetch(spotifyApiUrl, {
         method: 'GET',
-            headers:{ "Authorization": 'Bearer ' + token},
-            
+        headers: { "Authorization": 'Bearer ' + token },
+
     })
-        .then(function(response) {
-        return response.json();
-    })
-    .then (function(data) {
-        console.log(data);
-        var urlToPass = data.albums.items[0].external_urls.spotify;
-        console.log("This is the first URL2PASS: ", urlToPass);
-        displayFirstSearchResult(urlToPass)
-    });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            var urlToPass = data.albums.items[0].external_urls.spotify;
+            var albumCover = data.albums.items[0].images[0].url;
+            console.log("This is the first URL2PASS: ", urlToPass);
+            displayFirstSearchResult(urlToPass, albumCover)
+        });
 }
 
-var displayFirstSearchResult = function (urlToPass) {
-    console.log("THis is the 2nd: ",urlToPass);
+var displayFirstSearchResult = function (urlToPass, albumCover) {
+    console.log("THis is the 2nd: ", urlToPass);
     var urlToClick = document.createElement("a");
     urlToClick.textContent = urlToPass;
     urlToClick.setAttribute("href", urlToPass);
     urlToClick.setAttribute("target", "_blank");
+
+    var albumCoverToClick = document.createElement("img");
+    albumCoverToClick.src = albumCover;
+    urlToClick.appendChild(albumCoverToClick);
+
+
     artworkContainerEl.appendChild(urlToClick);
 }
 
 
-getSpotifyToken ();
+getSpotifyToken();
 
 
 // add event listeners to forms
