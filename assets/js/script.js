@@ -110,7 +110,7 @@ var getOmdbData = function (showName) {
 };
 
 // This function will fetch from the Spotify API
-var getSpotifyToken = function (showName) {
+var getSpotifyToken = function () {
     var clientId = "c0c739d14fa7455c845f2543a0bdd7a2";
     var clientSecret = "3892b03191084834a523304de30afb9f";
 
@@ -135,9 +135,57 @@ var getSpotifyToken = function (showName) {
 };
 
 
-var spotifyApiUrl = 'https://api.spotify.com/v1';
+var fetchTracks = function (albumId, callback) {
+    $.ajax({
+        url: 'https://api.spotify.com/v1/albums/' + albumId,
+        success: function (response) {
+            callback(response);
+        }
+    });
+};
+
+var searchAlbums = function (query) {
+    $.ajax({
+        url: 'https://api.spotify.com/v1/search',
+        data: {
+            q: query,
+            type: 'album'
+        },
+        success: function (response) {
+            resultsPlaceholder.innerHTML = template(response);
+        }
+    });
+};
+
+
+var getSpotifyData = function (token, searchString) {
+    var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString +'&type=album' ;
+
+    fetch(spotifyApiUrl, {
+        method: 'GET',
+            headers:{ "Authorization": 'Bearer ' + token},
+            // data: {
+            //     q: searchString,
+            //     type: 'album'
+            // },
+        
+    })
+        .then(function(response) {
+        return response.json();
+    })
+    .then (function(data) {
+        console.log(data);
+    });
+}
+
+
 
 
 getSpotifyToken ();
+
+var x = setTimeout(function(){
+    getSpotifyData (spotifyToken, "Scarface Original Soundtrack")
+}, 5000);
+
 // add event listeners to forms
 searchForm.addEventListener('submit', formSubmitHandler);
