@@ -141,29 +141,6 @@ var getSpotifyToken = function () {
 };
 
 
-var fetchTracks = function (albumId, callback) {
-    $.ajax({
-        url: 'https://api.spotify.com/v1/albums/' + albumId,
-        success: function (response) {
-            callback(response);
-        }
-    });
-};
-
-var searchAlbums = function (query) {
-    $.ajax({
-        url: 'https://api.spotify.com/v1/search',
-        data: {
-            q: query,
-            type: 'album'
-        },
-        success: function (response) {
-            resultsPlaceholder.innerHTML = template(response);
-        }
-    });
-};
-
-
 var getSpotifyData = function (token, searchString) {
     var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString + ' Original%20Motion%20Picture&type=album';
 
