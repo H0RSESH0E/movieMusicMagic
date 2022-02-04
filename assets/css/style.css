@@ -1,0 +1,21 @@
+* {
+    font-family: 'Questrial', sans-serif;
+}
+.hero {
+    background-color: #FFA3CF;    
+    background-image: url("");
+}
+
+.hero-body {
+    text-align: center;
+    position: relative;
+}
+
+.search-input {
+    padding: 0 150px 10px 0;
+    margin: 5px 20px 0 0;
+}
+
+header nav {
+    position: absolute;
+}
