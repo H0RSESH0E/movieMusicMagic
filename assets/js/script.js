@@ -2,13 +2,6 @@ var soundtrackContainerEl = document.querySelector('#soundtrack-container');
 var bigContainer = document.querySelector("#main-container")
 var artworkContainerEl = document.createElement("div");
 
-// Variable Declarations
-var spotifyToken;
-var searchTerm;
-var completed1;
-var completed2;
-
-
 var searchForm = document.createElement("form")
 var inputField = document.createElement("input");
 var submitButton = document.createElement("button")
@@ -19,6 +12,14 @@ searchForm.appendChild(submitButton);
 bigContainer.appendChild(searchForm);
 bigContainer.appendChild(artworkContainerEl);
 
+// Variable Declarations
+var spotifyToken;
+var searchTerm;
+var completed1;
+var completed2;
+
+// Local Storage Array 
+var storedSearches = {};
 
 // This function captures the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
@@ -176,6 +177,14 @@ var displayFirstSearchResult = function (urlToPass, albumCover) {
     artworkContainerEl.appendChild(urlToClick);
 }
 
+// Save users search input and results into local storage
+var saveSearchResults = function () {
+
+    
+
+
+    // localStorage.setItem("moviemusicmagic", JSON.stringify(storedSearch));
+};
 
 getSpotifyToken();
 
