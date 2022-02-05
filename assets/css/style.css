@@ -11,7 +11,7 @@ header img {
 }
 
 /* Hero Style Starts */
-.hero {
+.hero1 {
     background-color: #FFA3CF;    
     background-image: url("");
 }
@@ -20,11 +20,11 @@ header img {
     text-align: center;
 }
 
-.hero-image {
+/* .hero-image {
     width: 15%;
     height: 12%;
     float: left;
-}
+} */
 
 .search-input {
     padding: 5px 300px 5px 0;
@@ -61,3 +61,36 @@ button {
 nav {
     background-color: rgb(55, 204, 50);
 }
+
+/* @media screen and (max-width: 960px) {
+    .body 
+    header
+    nav
+    h1
+    img
+    p {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .body
+    header
+    nav
+    h1
+    img 
+    p {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .body
+    header
+    nav
+    h1
+    img
+    p  {
+        width: 100%;
+    }
+} */
