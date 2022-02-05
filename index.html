@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/10c12bd92a.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Questrial&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Movie Music Magic</title>
@@ -14,31 +15,39 @@
 
 <body>
     <!-- navigation -->
-    <header>    
-        <div class="block">
-            <h1 class="title is-4">MovieMusicMagic</h1>
-        </div>
-        <nav> 
-            <div class="block">
-                <button class="button is-dark" class="spotify">SPOTIFY</button>
+    <header>
+        <div class="columns box" id="first-div">   
+            <div class="column is-flex is-flex-direction-row is-justify-content-space-between" id="second-div">
+                <img src="assets/images/PinkElephantLogo.png"/>
+                <h1 class="title is-4">MovieMusicMagic</h1>
+                <nav> 
+                    <a href="" class="button is-dark" class="spotify">SPOTIFY</a>
+                </nav>
             </div>
-        </nav>
+        </div>
     </header>
 
     <main class="main-container">
     <!--hero/jumbotron-->
-        <section class="hero is-large" class="hero">
-            <div class="hero-body">
-              <p class="title">
-                Welcome to Movie Music Magic
-              </p>
-              <p class="subtitle">
-                insert slogan here
-              </p>     
-              <input type="search" placeholder="search movie here" class="search-input" style="text-align:center"/>
-            <button class="button is-dark">search</button>
-            </div>
-          </section>
+        <!-- <div class="columns">  -->
+            <!-- <div class="column is-flex is-flex-direction-row is-justify-content-space-between"> -->
+                <section class="hero is-small" class="hero">
+                    <div class="hero-body">
+                        <img class="hero-image" src="./assets/images/HeroImage1.png" alt="">
+                        <p class="title">
+                        Welcome to Movie Music Magic
+                        </p>
+                        <p class="subtitle">
+                        insert slogan here
+                        </p>   
+                    <div class="search-area">
+                        <input type="search" placeholder="search movie here" class="search-input" style="text-align:center"/>
+                        <button class="button is-dark is-medium">search</button> 
+                    </div>
+                </section>
+            <!-- </div> -->
+        <!-- </div> -->
+               
    
     </main>
 

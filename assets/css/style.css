@@ -1,6 +1,16 @@
 * {
     font-family: 'Questrial', sans-serif;
+    /* background-color: rgba(0, 0, 255, 0.151); */
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
 }
+/* Navigation Style*/
+header img {
+    width: 5%;
+}
+
+/* Hero Style Starts */
 .hero {
     background-color: #FFA3CF;    
     background-image: url("");
@@ -8,14 +18,46 @@
 
 .hero-body {
     text-align: center;
-    position: relative;
+}
+
+.hero-image {
+    width: 15%;
+    height: 12%;
+    float: left;
 }
 
 .search-input {
-    padding: 0 150px 10px 0;
-    margin: 5px 20px 0 0;
+    padding: 5px 300px 5px 0;
+    margin: 10px 20px 0 0;
 }
 
-header nav {
-    position: absolute;
+.main-container p {
+    text-align: right;
+}
+
+.search-area {
+    float: right;
+}
+
+
+
+/* Styling Aid */
+#first-div {
+    background-color: rgba(165, 42, 42, 0.226);
+}
+
+#second-div {
+    background-color: rgba(63, 165, 42, 0.226);
+}
+
+h1 {
+    background-color: rgba(100, 148, 237, 0.356);
+}
+
+button {
+    background-color: rgba(55, 0, 100, 0.342);
+}
+
+nav {
+    background-color: rgb(55, 204, 50);
 }
