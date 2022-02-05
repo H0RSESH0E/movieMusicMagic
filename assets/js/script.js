@@ -15,24 +15,25 @@ bigContainer.appendChild(artworkContainerEl);
 // Variable Declarations
 var spotifyToken;
 var searchTerm;
-var completed1;
-var completed2;
+var completed1 = false;
+var completed2 = false;
 
 // Local Storage Array 
-var storedSearches = {};
+var arrayToSaveInLocalStorage = [];
+var objectToSaveEachSearch = {};
 
 // This function captures the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
-
     event.preventDefault();
 
     searchTerm = inputField.value.trim();
     artworkContainerEl.textContent = '';
     inputField.value = '';
-    
+
     if (searchTerm) {
-        getOmdbData(searchTerm);
         getSpotifyData(spotifyToken, searchTerm)
+        getOmdbData(searchTerm);
+
     }
     else {
         // modal alert
@@ -47,15 +48,15 @@ var displayOmdb = function (movieData) {
     // Poster Art
     var posterEl = document.createElement("img");
     posterEl.setAttribute("src", movieData.Poster);
-
+    objectToSaveEachSearch.poster = movieData.Poster;
     // Official Show Title
     var showTitleEl = document.createElement("h2");
     showTitleEl.textContent = movieData.Title;
-
+    objectToSaveEachSearch.title = movieData.Title
     // Year
     var yearEl = document.createElement("h4");
     yearEl.textContent = movieData.Year;
-
+    objectToSaveEachSearch.year = movieData.Year;
     // Ratings 
     var ratingsDiv = document.createElement("div");
     if (movieData.Ratings.length > 0) {
@@ -90,6 +91,12 @@ var displayOmdb = function (movieData) {
     artworkContainerEl.appendChild(yearEl);
     artworkContainerEl.appendChild(ratingsDiv);
     artworkContainerEl.appendChild(websiteEl);
+
+
+
+
+
+
 }
 
 // This function fetches from the Open Movie Database and passes the data to the displayOmdb function
@@ -106,6 +113,12 @@ var getOmdbData = function (showName) {
                 response.json().then(function (data) {
                     console.log(data);
                     displayOmdb(data);
+                    completed1 = true;
+                    if (completed1 && completed2) {
+                        saveSearchResults();
+                        console.log("OMDB WINS!!!!!!");
+                        completed1 = false;
+                    }
                 });
             } else {
                 alert('Error: ' + response.statusText);
@@ -114,6 +127,9 @@ var getOmdbData = function (showName) {
         .catch(function (error) {
             alert('Unable to connect to OMDB');
         });
+
+
+
 };
 
 // This function will fetch from the Spotify API
@@ -156,10 +172,19 @@ var getSpotifyData = function (token, searchString) {
         .then(function (data) {
             console.log(data);
             var urlToPass = data.albums.items[0].external_urls.spotify;
+            objectToSaveEachSearch.spotifyLink = urlToPass;
             var albumCover = data.albums.items[0].images[0].url;
             console.log("This is the first URL2PASS: ", urlToPass);
             displayFirstSearchResult(urlToPass, albumCover)
+            completed2 = true;
+            if (completed1 && completed2) {
+                console.log("SPOTIFY!!!!!!!!!!");
+                saveSearchResults();
+                completed2 = false;
+            }
+
         });
+
 }
 
 var displayFirstSearchResult = function (urlToPass, albumCover) {
@@ -179,12 +204,19 @@ var displayFirstSearchResult = function (urlToPass, albumCover) {
 
 // Save users search input and results into local storage
 var saveSearchResults = function () {
+    console.log(arrayToSaveInLocalStorage, "before");
+    var y = objectToSaveEachSearch;
+    var q = setTimeout(function(){
+        arrayToSaveInLocalStorage.unshift(y);
+        console.log(arrayToSaveInLocalStorage, "after");
 
-    
-
+    }, 3000)
 
     // localStorage.setItem("moviemusicmagic", JSON.stringify(storedSearch));
 };
+
+var loadSavedSearches = function () { }
+
 
 getSpotifyToken();
 
