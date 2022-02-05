@@ -11,7 +11,7 @@ searchForm.appendChild(inputField);
 searchForm.appendChild(submitButton);
 bigContainer.appendChild(searchForm);
 bigContainer.appendChild(artworkContainerEl);
-
+var counter = 0;
 // Variable Declarations
 var spotifyToken;
 var searchTerm;
@@ -101,6 +101,9 @@ var displayOmdb = function (movieData) {
 
 // This function fetches from the Open Movie Database and passes the data to the displayOmdb function
 var getOmdbData = function (showName) {
+    debugger;
+    console.log(arrayToSaveInLocalStorage, "before OMDB FETCH");
+
     // format the github api url
     var apiUrl = `http://www.omdbapi.com/?apikey=eb60e924&t=${showName}`;
 
@@ -114,6 +117,7 @@ var getOmdbData = function (showName) {
                     console.log(data);
                     displayOmdb(data);
                     completed1 = true;
+                    counter = counter + 100;
                     if (completed1 && completed2) {
                         saveSearchResults();
                         console.log("OMDB WINS!!!!!!");
@@ -159,6 +163,8 @@ var getSpotifyToken = function () {
 
 
 var getSpotifyData = function (token, searchString) {
+    console.log(arrayToSaveInLocalStorage, "at the beginning of SPOTIFY FETCH");
+
     var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString + ' Original%20Motion%20Picture&type=album';
 
     fetch(spotifyApiUrl, {
@@ -177,6 +183,7 @@ var getSpotifyData = function (token, searchString) {
             console.log("This is the first URL2PASS: ", urlToPass);
             displayFirstSearchResult(urlToPass, albumCover)
             completed2 = true;
+            counter = counter + 10;
             if (completed1 && completed2) {
                 console.log("SPOTIFY!!!!!!!!!!");
                 saveSearchResults();
@@ -205,9 +212,11 @@ var displayFirstSearchResult = function (urlToPass, albumCover) {
 // Save users search input and results into local storage
 var saveSearchResults = function () {
     console.log(arrayToSaveInLocalStorage, "before");
+
+
     var y = objectToSaveEachSearch;
     var q = setTimeout(function(){
-        arrayToSaveInLocalStorage.unshift(y);
+        arrayToSaveInLocalStorage.push(y);
         console.log(arrayToSaveInLocalStorage, "after");
 
     }, 3000)
@@ -217,7 +226,7 @@ var saveSearchResults = function () {
 
 var loadSavedSearches = function () { }
 
-
+    console.log(arrayToSaveInLocalStorage, "before ANTHYING");
 getSpotifyToken();
 
 
