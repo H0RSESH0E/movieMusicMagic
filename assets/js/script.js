@@ -32,7 +32,7 @@ var formSubmitHandler = function (event) {
 
     if (searchTerm) {
         getSpotifyData(spotifyToken, searchTerm)
-        getOmdbData(searchTerm);
+        // getOmdbData(searchTerm);
 
     }
     else {
@@ -93,7 +93,7 @@ var displayOmdb = function (movieData) {
     artworkContainerEl.appendChild(websiteEl);
 
 
-
+    saveSearchResults();
 
 
 
@@ -113,12 +113,12 @@ var getOmdbData = function (showName) {
                 response.json().then(function (data) {
                     console.log(data);
                     displayOmdb(data);
-                    completed1 = true;
-                    if (completed1 && completed2) {
-                        saveSearchResults();
-                        console.log("OMDB WINS!!!!!!");
-                        completed1 = false;
-                    }
+                    // completed1 = true;
+                    // if (completed1 && completed2) {
+                    //     saveSearchResults();
+                    //     console.log("OMDB WINS!!!!!!");
+                    //     completed1 = false;
+                    // }
                 });
             } else {
                 alert('Error: ' + response.statusText);
@@ -171,17 +171,18 @@ var getSpotifyData = function (token, searchString) {
         })
         .then(function (data) {
             console.log(data);
+            getOmdbData(searchString);
             var urlToPass = data.albums.items[0].external_urls.spotify;
             objectToSaveEachSearch.spotifyLink = urlToPass;
             var albumCover = data.albums.items[0].images[0].url;
             console.log("This is the first URL2PASS: ", urlToPass);
             displayFirstSearchResult(urlToPass, albumCover)
-            completed2 = true;
-            if (completed1 && completed2) {
-                console.log("SPOTIFY!!!!!!!!!!");
-                saveSearchResults();
-                completed2 = false;
-            }
+            // completed2 = true;
+            // if (completed1 && completed2) {
+            //     console.log("SPOTIFY!!!!!!!!!!");
+            //     saveSearchResults();
+            //     completed2 = false;
+            // }
 
         });
 
@@ -205,14 +206,18 @@ var displayFirstSearchResult = function (urlToPass, albumCover) {
 // Save users search input and results into local storage
 var saveSearchResults = function () {
     console.log(arrayToSaveInLocalStorage, "before");
+    var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
     var y = objectToSaveEachSearch;
-    var q = setTimeout(function(){
-        arrayToSaveInLocalStorage.unshift(y);
-        console.log(arrayToSaveInLocalStorage, "after");
+    console.log(objectToSaveEachSearch);
+    getData.push(y);
 
-    }, 3000)
+    // var q = setTimeout(function(){
+    //     arrayToSaveInLocalStorage.unshift(y);
+    //     console.log(arrayToSaveInLocalStorage, "after");
 
-    // localStorage.setItem("moviemusicmagic", JSON.stringify(storedSearch));
+    // }, 3000)
+
+    localStorage.setItem("moviemusicmagic", JSON.stringify(getData));
 };
 
 var loadSavedSearches = function () { }
