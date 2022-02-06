@@ -200,7 +200,7 @@ var saveSearchResults = function () {
 // TODO: Load previous users search history on page 
 var loadSavedSearches = function () { };
 
-
+    console.log(arrayToSaveInLocalStorage, "before ANTHYING");
 getSpotifyToken();
 
 // Add event listeners to search form
