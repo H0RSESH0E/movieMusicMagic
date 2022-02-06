@@ -5,40 +5,38 @@
     margin: 0;
     padding: 0;
 }
+
 /* Navigation Style*/
 header img {
     width: 5%;
 }
 
+
 /* Hero Style Starts */
-.hero1 {
+
+#hero-main {
+    
     background-color: #FFA3CF;    
     background-image: url("");
 }
 
-.hero-body {
-    text-align: center;
-}
 
-/* .hero-image {
-    width: 15%;
-    height: 12%;
-    float: left;
-} */
+#header-title {
+    margin: 0 0 0 150px;
+}
 
 .search-input {
     padding: 5px 300px 5px 0;
     margin: 10px 20px 0 0;
 }
 
-.main-container p {
+/* .main-container p { 
     text-align: right;
-}
+}*/
 
 .search-area {
     float: right;
 }
-
 
 
 /* Styling Aid */

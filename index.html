@@ -16,43 +16,62 @@
 <body>
     <!-- navigation -->
     <header class="columns">
-        <div class="column is-flex is-flex-direction-row is-justify-content-flex-start is-two-thirds is-align-items-center" id="second-div">
-                <img src="assets/images/PinkElephantLogo.png"/>
-                <h1 class="title is-4">&nbsp;&nbsp;MovieMusicMagic</h1> 
+        <div class="column is-flex is-flex-direction-row is-justify-content-flex-start is-two-thirds is-align-items-center" id="header-title">
+            <img src="assets/images/PinkElephantLogo.png"/>
+            <h1 class="title is-4">&nbsp;&nbsp;MovieMusicMagic</h1> 
         </div>
-            <nav class="column is-flex is-flex-direction-row is-justify-content-center is-one-third is-align-items-center"> 
+            <nav class="container column is-flex is-flex-direction-row is-justify-content-center is-one-third is-align-items-center"> 
                     <a href="" class="button is-dark is-normal">SPOTIFY</a>
             </nav>
        
     </header>
 
-    <main class="main-container" class="columns">
-    <!--hero/jumbotron-->
-    <div class="columns">
-        <div class="column" class="hero is-small">
-          <div class="columns is-mobile">
-            <div class="column" class="hero1">
-                <img class="hero-image" src="./assets/images/HeroImage1.png" alt="" style="width: 15%; height: 15%;">
-                </div>
-                <div class="column" class="hero1">
+     <!--hero/jumbotron-->
+    <main class="columns" id="hero-main">
+            <div class="column is-flex is-flex-direction-row is-justify-content-center is-one-thrid is-align-items-center">
+                <img class="hero-image" src="./assets/images/HeroImage1.png" alt="" style="width: 50%; height: 100%;"> 
+            </div>
+            <div class="column is-two-third is-flex is-flex-wrap-wrap is-flex-direction-row-reverse  is-align-content-center" id="slogan"> 
                 <p class="title">
-                    Welcome to Movie Music Magic
-                    </p>
-                    <p class="subtitle">
-                    insert slogan here
-                    </p>   
-                    <div class="search-area">
-                        <input type="search" placeholder="search movie here" class="search-input" style="text-align:center"/>
-                        <button class="button is-dark is-normal">search</button> 
-                    </div> 
+                Welcome to Movie Music Magic
+                </p>
+                <p class="subtitle">
+                insert slogan here
+                </p> 
+                <div class="search-area">
+                <input type="search" placeholder="search movie here" class="search-input" style="text-align:center"/>
+                <button class="button is-dark is-normal">search</button>
                 </div>
-             </div>
-        </div>
-    <!--content-->
-    <div class="columns"> 
-
-    </div>  
+            </div>
     </main>
+    
+    <!--search results display-->
+    <section class="columns is-flex is-flex-direction-row is-one-third">
+        <div class="column is-half is-flex is-flex-direction-row is-justify-content-center is-align-items-center">    
+            <h1 class="title">
+            Movie Title Placeholder
+            </h1>
+        </div>
+    </section>
+
+    <div class="columns">
+        <div class="column is-half">
+            <figure class="image is-128x128">
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+            </figure>
+        </div>
+        <div class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center">
+            <h1 class="title">
+                Sountrack Playlist Title Placeholder
+            </h1>
+            <figure class="image is-128x128">
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+            </figure>
+            <p>
+                Spotify Link Placeholder
+            </p>
+        </div>
+    </div>
 
     <!--footer-->
     <footer class="columns">
