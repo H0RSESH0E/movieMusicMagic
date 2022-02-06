@@ -1,25 +1,42 @@
 * {
-    font-family: 'Questrial', sans-serif;
+    font-family: 'Roboto Slab', serif;
     /* background-color: rgba(0, 0, 255, 0.151); */
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 0;
     padding: 0;
 }
 
 /* Navigation Style*/
 header img {
-    width: 5%;
+    width: 4%;
 }
 
 
 /* Hero Style Starts */
 
 #hero-main {
-    
     background-color: #FFA3CF;    
     background-image: url("");
 }
 
+#slogan {
+    margin: 0 220px 0 0;
+
+}
+
+.title, .subtitle {
+    text-align: right;
+}
+
+#title-hero {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#subtitle-hero {
+    font-size: 30px;
+    color: white;
+}
 
 #header-title {
     margin: 0 0 0 150px;
@@ -30,16 +47,20 @@ header img {
     margin: 10px 20px 0 0;
 }
 
-/* .main-container p { 
-    text-align: right;
-}*/
-
 .search-area {
     float: right;
 }
+/* Hero styling ends*/
+
+/* Search Area Style Starts*/
+#spotify-link {
+    font-size: 25px;
+}
+
+/* Footer Style Starts*/
 
 
-/* Styling Aid */
+/* Styling Aid
 #first-div {
     background-color: rgba(165, 42, 42, 0.226);
 }
@@ -56,9 +77,9 @@ button {
     background-color: rgba(55, 0, 100, 0.342);
 }
 
-nav {
+/* nav { 
     background-color: rgb(55, 204, 50);
-}
+}*/
 
 /* @media screen and (max-width: 960px) {
     .body 
