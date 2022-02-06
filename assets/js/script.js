@@ -1,21 +1,8 @@
-// DOM Variable linking
-var soundtrackContainerEl = document.querySelector('#soundtrack-container');
-var bigContainer = document.querySelector("#main-container")
-
-// DOM element creation
-var artworkContainerEl = document.createElement("div");
-var searchForm = document.createElement("form")
-var inputField = document.createElement("input");
+var searchFormEl = document.querySelector("#search-form");
+var inputFieldEl = document.querySelector("input");
 
 // Submit Button element creation 
-var submitButton = document.createElement("button");
-submitButton.textContent = "SEARCH";
-
-// Populate the HTML with DOM elements 
-searchForm.appendChild(inputField);
-searchForm.appendChild(submitButton);
-bigContainer.appendChild(searchForm);
-bigContainer.appendChild(artworkContainerEl);
+var submitButton = document.querySelector("#search-btn");
 
 // Global Variable Declarations
 var spotifyToken;
@@ -30,11 +17,10 @@ var formSubmitHandler = function (event) {
     event.preventDefault();
 
     // Clean up user input
-    searchTerm = inputField.value.trim();
+    searchTerm = inputFieldEl.value.trim();
 
     // Clear old content
-    artworkContainerEl.textContent = '';
-    inputField.value = '';
+    inputFieldEl.value = '';
 
     // This comment is pointless
     if (searchTerm) {
@@ -49,19 +35,19 @@ var formSubmitHandler = function (event) {
 var displayOmdb = function (movieData) {
 
     // Poster Art
-    var posterEl = document.createElement("img");
+    var posterEl = document.querySelector("#movieImage");
     posterEl.setAttribute("src", movieData.Poster);
     objectToSaveEachSearch.poster = movieData.Poster;
     // Official Show Title
-    var showTitleEl = document.createElement("h2");
+    var showTitleEl = document.querySelector("#movie-title");
     showTitleEl.textContent = movieData.Title;
     objectToSaveEachSearch.title = movieData.Title
     // Year
-    var yearEl = document.createElement("h4");
-    yearEl.textContent = movieData.Year;
+    var yearEl = document.querySelector("#movie-year");
+    yearEl.textContent =movieData.Year;
     objectToSaveEachSearch.year = movieData.Year;
     // Iterates through possible array of ratings 
-    var ratingsDiv = document.createElement("div");
+    var ratingsDiv = document.querySelector("#movie-rating");
     if (movieData.Ratings.length > 0) {
         for (var i = 0; i < movieData.Ratings.length; i++) {
             var ratingContainer = document.createElement("div");
@@ -69,7 +55,7 @@ var displayOmdb = function (movieData) {
             var individualRatingEl = document.createElement("span");
 
             individualRatingSourceEl.textContent = movieData.Ratings[i].Source;
-            individualRatingEl.textContent = movieData.Ratings[i].Value;
+            individualRatingEl.textContent =movieData.Ratings[i].Value;
 
             ratingContainer.appendChild(individualRatingSourceEl);
             ratingContainer.appendChild(individualRatingEl);
@@ -79,20 +65,15 @@ var displayOmdb = function (movieData) {
     else {
         var noRatings = document.createElement("span");
         noRatings.textContent = "Sorry, there are no ratings for this movie."
+        ratingsDiv.appendChild(noRatings);
     }
 
     // Website link 
-    var websiteEl = document.createElement("a");
+    var websiteEl = document.querySelector("#movie-website");
     if (movieData.Website !== "N/A") {
         websiteEl.setAttribute("href", movieData.Website);
         websiteEl.textContent = movieData.Website;
     }
-
-    artworkContainerEl.appendChild(posterEl);
-    artworkContainerEl.appendChild(showTitleEl);
-    artworkContainerEl.appendChild(yearEl);
-    artworkContainerEl.appendChild(ratingsDiv);
-    artworkContainerEl.appendChild(websiteEl);
 
     saveSearchResults();
 };
@@ -163,32 +144,32 @@ var getSpotifyData = function (token, searchString) {
         .then(function (data) {
             // Call OMDb function to get OMDb data
             getOmdbData(searchString);
-
             // Getting Spotify URL link to soundtrack
             var urlToPass = data.albums.items[0].external_urls.spotify;
             objectToSaveEachSearch.spotifyLink = urlToPass;
             var albumCover = data.albums.items[0].images[0].url;
-            displaySpotifyData(urlToPass, albumCover)
+            var soundtrackTitle = data.albums.items[0].name;
+            displaySpotifyData(urlToPass, albumCover, soundtrackTitle)
         });
 };
 
 // This function displays spotify first search results
-var displaySpotifyData = function (urlToPass, albumCover) {
+var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
 
-    var urlToClick = document.createElement("a");
+    var urlToClick = document.querySelector("#spotify-link");
     urlToClick.setAttribute("href", urlToPass);
     urlToClick.setAttribute("target", "_blank");
 
-    var albumCoverToClick = document.createElement("img");
-    albumCoverToClick.src = albumCover;
+    var albumCoverToClick = document.querySelector("#musicImage");
+    albumCoverToClick.setAttribute("src", albumCover);
 
-    urlToClick.appendChild(albumCoverToClick);
-    artworkContainerEl.appendChild(urlToClick);
-}
+    var soundtrackTitleToClick = document.querySelector("#spotify-title");
+    soundtrackTitleToClick.textContent = soundtrackTitle;
+};
 
 // Save users search input and results into local storage
 var saveSearchResults = function () {
-
+    // TODO: eliminate duplication
     // Gets saved search results from local storage or creates a new empty array
     var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
     getData.unshift(objectToSaveEachSearch);
@@ -200,8 +181,7 @@ var saveSearchResults = function () {
 // TODO: Load previous users search history on page 
 var loadSavedSearches = function () { };
 
-    console.log(arrayToSaveInLocalStorage, "before ANTHYING");
 getSpotifyToken();
 
 // Add event listeners to search form
-searchForm.addEventListener('submit', formSubmitHandler);
+searchFormEl.addEventListener('submit', formSubmitHandler);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
+        integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>Movie Music Magic</title>
 </head>
@@ -16,60 +19,75 @@
 <body>
     <!-- navigation -->
     <header class="columns">
-        <div class="column is-flex is-flex-direction-row is-justify-content-flex-start is-two-thirds is-align-items-center" id="header-title">
-            <img src="assets/images/PinkElephantLogo.png"/>
-            <h1 class="title is-3">&nbsp;&nbsp;MovieMusicMagic</h1> 
+        <div class="column is-flex is-flex-direction-row is-justify-content-flex-start is-two-thirds is-align-items-center"
+            id="header-title">
+            <img src="assets/images/PinkElephantLogo.png" />
+            <h1 class="title is-3">&nbsp;&nbsp;MovieMusicMagic</h1>
         </div>
-            <nav class="container column is-flex is-flex-direction-row is-justify-content-center is-one-third is-align-items-center"> 
-                    <a href="" class="button is-dark is-normal">SPOTIFY</a>
-            </nav>
-       
+        <nav
+            class="container column is-flex is-flex-direction-row is-justify-content-center is-one-third is-align-items-center">
+            <a href="" class="button is-dark is-normal">SPOTIFY</a>
+        </nav>
+
     </header>
 
-     <!--hero/jumbotron-->
+    <!--hero/jumbotron-->
     <main class="columns" id="hero-main">
-            <div class="column is-flex is-flex-direction-row is-justify-content-end is-one-third is-align-items-center">
-                <img class="hero-image" src="./assets/images/HeroImage1.png" alt="" style="width: 50%; height: 100%;"> 
-            </div>
-            <div class="column is-two-third is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-content-end" id="slogan"> 
-                <p class="title" id="title-hero">
+        <div class="column is-flex is-flex-direction-row is-justify-content-end is-one-third is-align-items-center">
+            <img class="hero-image" src="./assets/images/HeroImage1.png" alt="" style="width: 50%; height: 100%;">
+        </div>
+        <div class="column is-two-third is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-content-end"
+            id="slogan">
+            <p class="title" id="title-hero">
                 Welcome to Movie Music Magic
-                </p>
-                <p class="subtitle" id="subtitle-hero">
+            </p>
+            <p class="subtitle" id="subtitle-hero">
                 insert slogan here
-                </p> 
-                <div class="search-area is-flex is-justify-content-flex-end">
-                <input type="search" placeholder="search movie here" class="search-input" style="text-align:center"/>
-                <button class="button is-dark is-normal">search</button>
-                </div>
-            </div>
+            </p>
+            <form id="search-form" class="search-area is-flex is-justify-content-flex-end">
+                <input type="search" placeholder="search movie here" class="search-input" style="text-align:center" />
+                <button id="search-btn" type="submit" class="button is-dark is-normal">search</button>
+            </form>
+        </div>
     </main>
-    
+
     <!--search results display-->
     <section class="columns is-flex is-flex-direction-row is-one-third">
-        <div class="column is-half is-flex is-flex-direction-row is-justify-content-center is-align-items-center">    
-            <h1 class="title">
-            Movie Title Placeholder
+        <div class="column is-half is-flex is-flex-direction-row is-justify-content-center is-align-items-center">
+            <h1 id="movie-title" class="title">
+                Movie Title Placeholder
             </h1>
+            <p id="movie-year">
+
+            </p>
+            <p id="movie-rating">
+
+            </p>
+            <p id="movie-website">
+                
+            </p>
         </div>
     </section>
 
     <div class="columns">
         <div class="column is-half">
             <figure class="image">
-                <img src="./assets/images/placeholder-image.png">
+                <img id="movieImage" src="./assets/images/placeholder-image.png">
             </figure>
         </div>
-        <div class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center">
-            <h1 class="title">
+        <div
+            class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center">
+            <h1 id="spotify-title" class="title">
                 Sountrack Playlist Title Placeholder
             </h1>
-            <figure class="image">
-                <img src="./assets/images/placeholder-image.png">
-            </figure>
-            <p id="spotify-link">
-                Spotify Link Placeholder
-            </p>
+            <a id="spotify-link">
+                <figure class="image">
+                    <img id="musicImage" src="./assets/images/placeholder-image.png">
+                </figure>
+                <p id="spotify-link">
+                    Spotify Link to Soundtrack
+                </p>
+            </a>
         </div>
     </div>
 
@@ -80,8 +98,9 @@
             Footer Placeholder
         </p>
     </footer>
- 
+
 
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>
