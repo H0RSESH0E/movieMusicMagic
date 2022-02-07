@@ -12,7 +12,7 @@ var searchTerm;
 
 // Local Storage Array 
 var objectToSaveEachSearch = {};
-
+var getData = [];
 // This function triggers the application to begin by capturing the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
 
@@ -78,7 +78,7 @@ var displayOmdb = function (movieData) {
         websiteEl.textContent = movieData.Website;
     }
 
-    saveSearchResults();
+    saveSearchResults(movieData);
 };
 
 // This function fetches from the Open Movie Database and passes the data to the displayOmdb function
@@ -171,17 +171,22 @@ var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
 };
 
 // Save users search input and results into local storage
-var saveSearchResults = function () {
+var saveSearchResults = function (movieData) {
 
-     // Gets saved search results from local storage or creates a new empty array
-     var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
+    // Gets saved search results from local storage or creates a new empty array
+    var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
 
-     getData.unshift(objectToSaveEachSearch);
- 
-     // Sets local storage to contain latest search object
-     localStorage.setItem("moviemusicmagic", JSON.stringify(getData));
- 
-    
+    for (var i = 0; i < getData.length; i++) {
+        if (getData[i].title === movieData.Title) {
+           getData.splice(i, 1);
+           break;
+        } 
+    }
+
+    getData.unshift(objectToSaveEachSearch);
+
+    // Sets local storage to contain latest search object
+    localStorage.setItem("moviemusicmagic", JSON.stringify(getData));
 };
 
 // TODO: Load previous users search history on page 
