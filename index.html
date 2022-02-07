@@ -16,18 +16,25 @@
     <title>Movie Music Magic</title>
 </head>
 
-<body>
+<body class="has-navbar-fixed-top">
     <!-- navigation -->
-    <header class="columns">
-        <div class="column is-flex is-flex-direction-row is-justify-content-flex-start is-two-thirds is-align-items-center"
-            id="header-title">
-            <img src="assets/images/PinkElephantLogo.png" />
-            <h1 class="title is-3">&nbsp;&nbsp;MovieMusicMagic</h1>
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <img src="./assets/images/PinkElephantLogo.png" width="40" height="10" class="ml-2" />
+                <h3 class="title is-5 mt-4">&nbsp;&nbsp;MovieMusicMagic</h3>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <a href="https://www.spotify.com/ca-en/" target="_blank">
+                            <img src="./assets/images/Spotify_Icon_Black.png" width="30" height="10" class="mr-2" />
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <nav class="container column is-flex is-flex-direction-row is-justify-content-center is-one-third is-align-items-center">
-            <a href="" class="button is-dark is-normal">SPOTIFY</a>
-        </nav>
-    </header>
+    </nav>
 
     <!--hero/jumbotron-->
     <main class="columns" id="hero-main">
@@ -43,7 +50,8 @@
                 Move to movie magic.
             </p>
             <form id="search-form" class="search-area is-flex is-justify-content-flex-end">
-                <input type="search" placeholder="search movie here" class="input is-normal" style="text-align:center" />
+                <input type="search" placeholder="search movie here" class="input is-normal"
+                    style="text-align:center" />
                 <button id="search-btn" type="submit" class="button is-dark is-normal">search</button>
             </form>
         </div>
@@ -51,9 +59,10 @@
 
     <!--search results display-->
     <section class="columns is-flex is-flex-direction-row is-one-third">
-        <div id="movie-section" class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
-            <h1 class="title" id="movie-title" >
-        
+        <div id="movie-section"
+            class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
+            <h1 class="title" id="movie-title">
+
             </h1>
             <figure class="image">
                 <img id="movieImage" src="./assets/images/placeholder-image.png">
@@ -63,9 +72,10 @@
             </p>
             <p id="movie-website"></p>
         </div>
-        <div id="music-section" class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
-            <h1 class="title is-5" id="spotify-title" >
-            
+        <div id="music-section"
+            class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
+            <h1 class="title is-5" id="spotify-title">
+
             </h1>
             <a id="spotify-link">
                 <figure class="image">
@@ -91,18 +101,19 @@
     <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Oops!</p>
-            <button class="delete" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <p>Communication with the server was interupted.  Please check your search term and connection and try again.</p>
-        </section>
-          <footer class="modal-card-foot">
-              <p>Insert P.E. Branding Here</p>
-          </footer>
+            <header class="modal-card-head">
+                <p class="modal-card-title">Oops!</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <p>Communication with the server was interupted. Please check your search term and connection and try
+                    again.</p>
+            </section>
+            <footer class="modal-card-foot">
+                <p>Insert P.E. Branding Here</p>
+            </footer>
         </div>
-      </div>
+    </div>
 
 
 
