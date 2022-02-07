@@ -86,7 +86,7 @@ var getOmdbData = function (showName) {
 
     // OMDb API 
     var apiUrl = `http://www.omdbapi.com/?apikey=eb60e924&t=${showName}`;
-
+    // FOR TESTING: openErrorAlertModal('Error: ' + searchTerm);
     // make a get request to url
     fetch(apiUrl)
         .then(function (response) {
@@ -97,11 +97,11 @@ var getOmdbData = function (showName) {
                         displayOmdb(data);
                     });
             } else {
-                alert('Error: ' + response.statusText); //TODO: make into modal
+                openErrorAlertModal('Error: ' + response.statusText);
             }
         })
         .catch(function (error) {
-            alert('Unable to connect to OMDB'); //TODO: make into modal
+            openErrorAlertModal("Please check your connection settings. " + error);
         });
 };
 
@@ -142,18 +142,30 @@ var getSpotifyData = function (token, searchString) {
         headers: { "Authorization": 'Bearer ' + token },
     })
         .then(function (response) {
-            return response.json();
+            if (response.ok) {
+            response.json()
+        
+                .then(function (data) {
+                    // Call OMDb function to get OMDb data
+                    getOmdbData(searchString);
+                    // Getting Spotify URL link to soundtrack
+                    var urlToPass = data.albums.items[0].external_urls.spotify;
+                    objectToSaveEachSearch.spotifyLink = urlToPass;
+                    var albumCover = data.albums.items[0].images[0].url;
+                    var soundtrackTitle = data.albums.items[0].name;
+                    displaySpotifyData(urlToPass, albumCover, soundtrackTitle)
+                });
+         
+           }
+           else {
+                openErrorAlertModal('Error: ' + response.statusText);
+            }
         })
-        .then(function (data) {
-            // Call OMDb function to get OMDb data
-            getOmdbData(searchString);
-            // Getting Spotify URL link to soundtrack
-            var urlToPass = data.albums.items[0].external_urls.spotify;
-            objectToSaveEachSearch.spotifyLink = urlToPass;
-            var albumCover = data.albums.items[0].images[0].url;
-            var soundtrackTitle = data.albums.items[0].name;
-            displaySpotifyData(urlToPass, albumCover, soundtrackTitle)
+        .catch(function (error) {
+            openErrorAlertModal("Please check your connection settings. " + error);
         });
+
+    
 };
 
 // This function displays spotify first search results
@@ -188,6 +200,23 @@ var saveSearchResults = function (movieData) {
     // Sets local storage to contain latest search object
     localStorage.setItem("moviemusicmagic", JSON.stringify(getData));
 };
+
+var openErrorAlertModal = function (errorMsg) {
+    var modal = document.querySelector(".modal");
+    modal.classList.add("is-active");
+    var modalCardBody = document.querySelector(".modal-card-body");
+    modalCardBody.innerHTML = `<p>Sorry.  There was an error:<br> ${errorMsg}</p>`
+    var modalClose = document.querySelector(".is-active");
+    modalClose.addEventListener('click', closeErrorAlertModal);
+
+};
+
+var closeErrorAlertModal = function (event) {
+    console.log(event);
+    var modal = document.querySelector(".modal");
+    modal.classList.remove("is-active");
+};
+
 
 // TODO: Load previous users search history on page 
 var loadSavedSearches = function () { };
