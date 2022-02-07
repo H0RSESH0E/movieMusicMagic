@@ -1,5 +1,7 @@
 var searchFormEl = document.querySelector("#search-form");
 var inputFieldEl = document.querySelector("input");
+var movieSectionEl = document.querySelector("#movie-section");
+var musicSectionEl = document.querySelector("#music-section");
 
 // Submit Button element creation 
 var submitButton = document.querySelector("#search-btn");
@@ -15,6 +17,9 @@ var objectToSaveEachSearch = {};
 var formSubmitHandler = function (event) {
 
     event.preventDefault();
+
+    movieSectionEl.classList.remove("is-hidden");
+    musicSectionEl.classList.remove("is-hidden");
 
     // Clean up user input
     searchTerm = inputFieldEl.value.trim();
@@ -33,7 +38,7 @@ var formSubmitHandler = function (event) {
 
 // This function appends the dynamically created elements to the page
 var displayOmdb = function (movieData) {
-    
+
     // Poster Art
     var posterEl = document.querySelector("#movieImage");
     posterEl.setAttribute("src", movieData.Poster);
@@ -167,13 +172,16 @@ var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
 
 // Save users search input and results into local storage
 var saveSearchResults = function () {
-    // TODO: eliminate duplication
-    // Gets saved search results from local storage or creates a new empty array
-    var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
-    getData.unshift(objectToSaveEachSearch);
 
-    // Sets local storage to contain latest search object
-    localStorage.setItem("moviemusicmagic", JSON.stringify(getData));
+     // Gets saved search results from local storage or creates a new empty array
+     var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
+
+     getData.unshift(objectToSaveEachSearch);
+ 
+     // Sets local storage to contain latest search object
+     localStorage.setItem("moviemusicmagic", JSON.stringify(getData));
+ 
+    
 };
 
 // TODO: Load previous users search history on page 
