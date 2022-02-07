@@ -28,7 +28,6 @@
             class="container column is-flex is-flex-direction-row is-justify-content-center is-one-third is-align-items-center">
             <a href="" class="button is-dark is-normal">SPOTIFY</a>
         </nav>
-
     </header>
 
     <!--hero/jumbotron-->
@@ -42,10 +41,10 @@
                 Welcome to Movie Music Magic
             </p>
             <p class="subtitle" id="subtitle-hero">
-                insert slogan here
+                Move to movie magic.
             </p>
             <form id="search-form" class="search-area is-flex is-justify-content-flex-end">
-                <input type="search" placeholder="search movie here" class="search-input" style="text-align:center" />
+                <input type="search" placeholder="search movie here" class="input is-normal" style="text-align:center" />
                 <button id="search-btn" type="submit" class="button is-dark is-normal">search</button>
             </form>
         </div>
@@ -53,32 +52,21 @@
 
     <!--search results display-->
     <section class="columns is-flex is-flex-direction-row is-one-third">
-        <div class="column is-half is-flex is-flex-direction-row is-justify-content-center is-align-items-center">
-            <h1 id="movie-title" class="title">
-                Movie Title Placeholder
+        <div class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center">
+            <h1 class="title" id="movie-title" >
+        
             </h1>
-            <p id="movie-year">
-
-            </p>
+            <figure class="image">
+                <img id="movieImage" src="./assets/images/placeholder-image.png">
+            </figure> <br>
             <p id="movie-rating">
 
             </p>
-            <p id="movie-website">
-                
-            </p>
+            <p id="movie-website"></p>
         </div>
-    </section>
-
-    <div class="columns">
-        <div class="column is-half">
-            <figure class="image">
-                <img id="movieImage" src="./assets/images/placeholder-image.png">
-            </figure>
-        </div>
-        <div
-            class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center">
-            <h1 id="spotify-title" class="title">
-                Sountrack Playlist Title Placeholder
+        <div class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center">
+            <h1 class="title is-5" id="spotify-title" >
+            
             </h1>
             <a id="spotify-link">
                 <figure class="image">
@@ -89,16 +77,15 @@
                 </p>
             </a>
         </div>
-    </div>
+    </section>
 
     <!--footer-->
     <br><br><br>
     <footer class="columns is-flex is-justify-content-center">
         <p>
-            Footer Placeholder
+            &copy; The Pink Elephants 2022
         </p>
     </footer>
-
 
     <script src="assets/js/script.js"></script>
 </body>

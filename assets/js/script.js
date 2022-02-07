@@ -33,39 +33,37 @@ var formSubmitHandler = function (event) {
 
 // This function appends the dynamically created elements to the page
 var displayOmdb = function (movieData) {
-
+    
     // Poster Art
     var posterEl = document.querySelector("#movieImage");
     posterEl.setAttribute("src", movieData.Poster);
     objectToSaveEachSearch.poster = movieData.Poster;
     // Official Show Title
     var showTitleEl = document.querySelector("#movie-title");
-    showTitleEl.textContent = movieData.Title;
+    showTitleEl.textContent = `${movieData.Title} (${movieData.Year})`;
     objectToSaveEachSearch.title = movieData.Title
     // Year
-    var yearEl = document.querySelector("#movie-year");
-    yearEl.textContent =movieData.Year;
     objectToSaveEachSearch.year = movieData.Year;
     // Iterates through possible array of ratings 
-    var ratingsDiv = document.querySelector("#movie-rating");
+    var ratingsPar = document.querySelector("#movie-rating");
+    ratingsPar.innerHTML = "";
     if (movieData.Ratings.length > 0) {
         for (var i = 0; i < movieData.Ratings.length; i++) {
             var ratingContainer = document.createElement("div");
             var individualRatingSourceEl = document.createElement("span")
             var individualRatingEl = document.createElement("span");
 
-            individualRatingSourceEl.textContent = movieData.Ratings[i].Source;
-            individualRatingEl.textContent =movieData.Ratings[i].Value;
+            individualRatingSourceEl.textContent = `${movieData.Ratings[i].Source}: \u00a0 ${movieData.Ratings[i].Value}`;
 
             ratingContainer.appendChild(individualRatingSourceEl);
             ratingContainer.appendChild(individualRatingEl);
-            ratingsDiv.appendChild(ratingContainer);
+            ratingsPar.appendChild(ratingContainer);
         }
     }
     else {
         var noRatings = document.createElement("span");
         noRatings.textContent = "Sorry, there are no ratings for this movie."
-        ratingsDiv.appendChild(noRatings);
+        ratingsPar.appendChild(noRatings);
     }
 
     // Website link 

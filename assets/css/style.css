@@ -11,6 +11,12 @@ header img {
     width: 4%;
 }
 
+header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0; 
+    background-color: white; 
+}
 
 /* Hero Style Starts */
 
@@ -42,9 +48,12 @@ header img {
     margin: 0 0 0 150px;
 }
 
-.search-input {
-    padding: 5px 300px 5px 0;
-    margin: 10px 20px 0 0;
+input {
+    margin-right: 8px;
+}
+
+.button, .input {
+    position:static;
 }
 
 .search-area {
@@ -55,7 +64,23 @@ header img {
 /* Search Area Style Starts*/
 #spotify-link {
     font-size: 25px;
+    margin: 35px;
 }
+
+.image {
+    max-width: 20vw;
+}
+
+#spotify-title {
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+/* 
+#movie-rating {
+    display: flex;
+    flex-direction: column;
+} */
 
 
 /* Footer Style Starts*/
