@@ -65,10 +65,18 @@ input {
 #spotify-link {
     font-size: 25px;
     margin: 35px;
+    position: relative
+}
+#spotify-link:hover {
+    opacity: 0.5;
 }
 
 .image {
     max-width: 20vw;
+}
+
+#movieImage, #musicImage {
+    box-shadow: 10px 10px 5px grey;
 }
 
 #spotify-title {

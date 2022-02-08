@@ -180,6 +180,7 @@ var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
 
     var soundtrackTitleToClick = document.querySelector("#spotify-title");
     soundtrackTitleToClick.textContent = soundtrackTitle;
+    
 };
 
 // Save users search input and results into local storage
