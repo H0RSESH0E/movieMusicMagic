@@ -2,6 +2,7 @@ var searchFormEl = document.querySelector("#search-form");
 var inputFieldEl = document.querySelector("input");
 var movieSectionEl = document.querySelector("#movie-section");
 var musicSectionEl = document.querySelector("#music-section");
+var searchHistoryContainerEl = document.querySelector("#display-search-history");
 
 // Submit Button element creation 
 var submitButton = document.querySelector("#search-btn");
@@ -9,6 +10,7 @@ var submitButton = document.querySelector("#search-btn");
 // Global Variable Declarations
 var spotifyToken;
 var searchTerm;
+var searchHistory = [];
 
 // Local Storage Array 
 var objectToSaveEachSearch = {};
@@ -143,21 +145,21 @@ var getSpotifyData = function (token, searchString) {
     })
         .then(function (response) {
             if (response.ok) {
-            response.json()
-        
-                .then(function (data) {
-                    // Call OMDb function to get OMDb data
-                    getOmdbData(searchString);
-                    // Getting Spotify URL link to soundtrack
-                    var urlToPass = data.albums.items[0].external_urls.spotify;
-                    objectToSaveEachSearch.spotifyLink = urlToPass;
-                    var albumCover = data.albums.items[0].images[0].url;
-                    var soundtrackTitle = data.albums.items[0].name;
-                    displaySpotifyData(urlToPass, albumCover, soundtrackTitle)
-                });
-         
-           }
-           else {
+                response.json()
+
+                    .then(function (data) {
+                        // Call OMDb function to get OMDb data
+                        getOmdbData(searchString);
+                        // Getting Spotify URL link to soundtrack
+                        var urlToPass = data.albums.items[0].external_urls.spotify;
+                        objectToSaveEachSearch.spotifyLink = urlToPass;
+                        var albumCover = data.albums.items[0].images[0].url;
+                        var soundtrackTitle = data.albums.items[0].name;
+                        displaySpotifyData(urlToPass, albumCover, soundtrackTitle)
+                    });
+
+            }
+            else {
                 openErrorAlertModal('Error: ' + response.statusText);
             }
         })
@@ -165,7 +167,7 @@ var getSpotifyData = function (token, searchString) {
             openErrorAlertModal("Please check your connection settings. " + error);
         });
 
-    
+
 };
 
 // This function displays spotify first search results
@@ -180,7 +182,7 @@ var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
 
     var soundtrackTitleToClick = document.querySelector("#spotify-title");
     soundtrackTitleToClick.textContent = soundtrackTitle;
-    
+
 };
 
 // Save users search input and results into local storage
@@ -191,9 +193,13 @@ var saveSearchResults = function (movieData) {
 
     for (var i = 0; i < getData.length; i++) {
         if (getData[i].title === movieData.Title) {
-           getData.splice(i, 1);
-           break;
-        } 
+            getData.splice(i, 1);
+            break;
+        }
+    }
+    // Only stores 3 recent searchs from user (not sure why 2 means the array length and not actual length )
+    if (getData.length > 2) {
+        getData.pop();
     }
 
     getData.unshift(objectToSaveEachSearch);
@@ -220,9 +226,36 @@ var closeErrorAlertModal = function (event) {
 
 
 // TODO: Load previous users search history on page 
-var loadSavedSearches = function () { };
+var loadSavedSearches = function () {
+
+    var savedSearches = JSON.parse(localStorage.getItem("moviemusicmagic"));
+
+    if (savedSearches !== null) {
+        searchHistory = savedSearches;
+    }
+
+    displaySearchHistory();
+
+    
+};
+
+var displaySearchHistory = function () {
+    console.log(searchHistory);
+
+    for (var i =0; i < searchHistory.length; i++) {
+        var searchHistoryImage = document.querySelector("#search-history-image");
+        var searchHistoryTitle = document.querySelector("#search-history-title");
+        searchHistoryImage.setAttribute("src", searchHistory[i].poster);
+        searchHistoryTitle.textContent = searchHistory[i].title;
+
+        searchHistoryContainerEl.appendChild(searchHistoryImage);
+        searchHistoryContainerEl.appendChild(searchHistoryTitle);
+
+    }
+}
 
 getSpotifyToken();
-
+loadSavedSearches();
 // Add event listeners to search form
 searchFormEl.addEventListener('submit', formSubmitHandler);
+searchHistoryContainerEl.addEventListener("click", loadSavedSearches)
