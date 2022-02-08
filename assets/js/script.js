@@ -94,8 +94,14 @@ var getOmdbData = function (showName) {
             if (response.ok) {
                 response.json()
                     .then(function (data) {
+                        console.log(data);
+                        if (data.Response === "False") {
+                            openErrorAlertModal('The server says: ' + data.Error);
+                        }
+                    else {
                         displayOmdb(data);
-                    });
+                    }
+                });
             } else {
                 openErrorAlertModal('Error: ' + response.statusText);
             }
