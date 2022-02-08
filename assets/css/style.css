@@ -65,10 +65,15 @@ input {
 #spotify-link {
     font-size: 25px;
     margin: 35px;
-    position: relative
+    position: relative;
 }
 #spotify-link:hover {
     opacity: 0.5;
+}
+
+#spotify-title {
+    padding: 2vw;
+    text-align: center;
 }
 
 .image {

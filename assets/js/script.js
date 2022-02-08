@@ -9,6 +9,7 @@ var submitButton = document.querySelector("#search-btn");
 // Global Variable Declarations
 var spotifyToken;
 var searchTerm;
+var omdbDataGlobal;
 
 // Local Storage Array 
 var objectToSaveEachSearch = {};
@@ -29,10 +30,11 @@ var formSubmitHandler = function (event) {
 
     // This comment is pointless
     if (searchTerm) {
-        getSpotifyData(spotifyToken, searchTerm)
+        getOmdbData(searchTerm);
+        // getSpotifyData(spotifyToken, searchTerm)
     }
     else {
-        // TODO: modal alert - create HTML element for modal with class hidden - unhide if searchTerm is not valid
+        openErrorAlertModal("That does not appear to be a valid search term.");
     }
 };
 
@@ -98,10 +100,12 @@ var getOmdbData = function (showName) {
                         if (data.Response === "False") {
                             openErrorAlertModal('The server says: ' + data.Error);
                         }
-                    else {
-                        displayOmdb(data);
-                    }
-                });
+                        else {
+                            omdbDataGlobal = data;
+                            getSpotifyData(spotifyToken, searchTerm)
+
+                        }
+                    });
             } else {
                 openErrorAlertModal('Error: ' + response.statusText);
             }
@@ -149,21 +153,37 @@ var getSpotifyData = function (token, searchString) {
     })
         .then(function (response) {
             if (response.ok) {
-            response.json()
-        
-                .then(function (data) {
-                    // Call OMDb function to get OMDb data
-                    getOmdbData(searchString);
-                    // Getting Spotify URL link to soundtrack
-                    var urlToPass = data.albums.items[0].external_urls.spotify;
-                    objectToSaveEachSearch.spotifyLink = urlToPass;
-                    var albumCover = data.albums.items[0].images[0].url;
-                    var soundtrackTitle = data.albums.items[0].name;
-                    displaySpotifyData(urlToPass, albumCover, soundtrackTitle)
-                });
-         
-           }
-           else {
+                response.json()
+
+                    .then(function (data) {
+                        console.log("This is the spotify YYYYYY: ", data);
+                        console.log(data.albums.items.length)
+                        if (data.albums.items.length > 0) {
+                            var urlToPass = data.albums.items[0].external_urls.spotify;
+                            objectToSaveEachSearch.spotifyLink = urlToPass;
+                            var albumCover = data.albums.items[0].images[0].url;
+                            var soundtrackTitle = data.albums.items[0].name;
+                            console.log("soundtrackTitle: ", soundtrackTitle, " & omdbDataGlobal.Title: ", omdbDataGlobal.Title);
+                            var spotifyAlbumYear = data.albums.items[0].release_date;
+                            spotifyAlbumYear = spotifyAlbumYear.slice(0, 4);
+                            if (omdbDataGlobal.Year === spotifyAlbumYear) {
+                                displayOmdb(omdbDataGlobal);
+                                displaySpotifyData(urlToPass, albumCover, soundtrackTitle);
+                            }
+                            else {
+                                displayOmdb(omdbDataGlobal);
+                                unofficialSoundtrackResult(token, searchString);
+                            }
+                        }
+                        else {
+                            displayOmdb(omdbDataGlobal);
+                            unofficialSoundtrackResult(token, searchString);
+
+                        }
+                    });
+
+            }
+            else {
                 openErrorAlertModal('Error: ' + response.statusText);
             }
         })
@@ -171,8 +191,52 @@ var getSpotifyData = function (token, searchString) {
             openErrorAlertModal("Please check your connection settings. " + error);
         });
 
-    
+
 };
+
+var unofficialSoundtrackResult = function (token, searchString) {
+    // Get Spotify API non "Original Motion Picture" data 
+    var spotifyApiUrl = `https://api.spotify.com/v1/search?q=${searchString} ${omdbDataGlobal.Year} soundtrack&type=playlist`;
+
+
+    fetch(spotifyApiUrl, {
+        method: 'GET',
+        headers: { "Authorization": 'Bearer ' + token },
+    })
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+
+                    .then(function (data) {
+                        console.log("This is the second data requested: ", data);
+                        if (data.playlists.items.length > 0) {
+                            var urlToPass = data.playlists.items[0].external_urls.spotify;
+                        objectToSaveEachSearch.spotifyLink = urlToPass;
+                        var albumCover = data.playlists.items[0].images[0].url;
+                        var soundtrackTitle = `Unofficial Playlist:\r\n" + data.playlists.items[0].name`;
+
+                        displaySpotifyData(urlToPass, albumCover, soundtrackTitle);
+
+                    }
+                    else {
+                        clearSpotifyData();
+                    }
+                    });
+
+            }
+            else {
+                openErrorAlertModal('Error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            openErrorAlertModal("Please check your connection settings. " + error);
+        });
+
+
+
+
+
+}
 
 // This function displays spotify first search results
 var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
@@ -186,8 +250,20 @@ var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
 
     var soundtrackTitleToClick = document.querySelector("#spotify-title");
     soundtrackTitleToClick.textContent = soundtrackTitle;
-    
+
 };
+
+var clearSpotifyData = function () {
+    var urlToClick = document.querySelector("#spotify-link");
+    urlToClick.setAttribute("href", "");
+    urlToClick.setAttribute("target", "_blank");
+
+    var albumCoverToClick = document.querySelector("#musicImage");
+    albumCoverToClick.setAttribute("src", "");
+
+    var soundtrackTitleToClick = document.querySelector("#spotify-title");
+    soundtrackTitleToClick.textContent = "Sorry.  There is no official original motion picture soundtrack or matching unofficial soundtrack playlist.";
+}
 
 // Save users search input and results into local storage
 var saveSearchResults = function (movieData) {
@@ -197,9 +273,9 @@ var saveSearchResults = function (movieData) {
 
     for (var i = 0; i < getData.length; i++) {
         if (getData[i].title === movieData.Title) {
-           getData.splice(i, 1);
-           break;
-        } 
+            getData.splice(i, 1);
+            break;
+        }
     }
 
     getData.unshift(objectToSaveEachSearch);
@@ -212,7 +288,7 @@ var openErrorAlertModal = function (errorMsg) {
     var modal = document.querySelector(".modal");
     modal.classList.add("is-active");
     var modalCardBody = document.querySelector(".modal-card-body");
-    modalCardBody.innerHTML = `<p>Sorry.  There was an error:<br> ${errorMsg}</p>`
+    modalCardBody.innerHTML = `<p>Sorry.  There seems to be a problem:<br> ${errorMsg}</p>`
     var modalClose = document.querySelector(".is-active");
     modalClose.addEventListener('click', closeErrorAlertModal);
 
