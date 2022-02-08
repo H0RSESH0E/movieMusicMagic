@@ -216,7 +216,7 @@ var unofficialSoundtrackResult = function (token, searchString) {
                             var urlToPass = data.playlists.items[0].external_urls.spotify;
                         objectToSaveEachSearch.spotifyLink = urlToPass;
                         var albumCover = data.playlists.items[0].images[0].url;
-                        var soundtrackTitle = `Unofficial Playlist:\r\n" + data.playlists.items[0].name`;
+                        var soundtrackTitle = `Unofficial Playlist: ${data.playlists.items[0].name}`;
 
                         displaySpotifyData(urlToPass, albumCover, soundtrackTitle);
 

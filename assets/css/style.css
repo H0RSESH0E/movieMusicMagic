@@ -100,7 +100,6 @@ input {
 /* Spotify Album Cover Image  */
 .img-wrapper {
     position: relative;
-    overflow: hidden;
 }
 
 .img-wrapper > .image-content {
