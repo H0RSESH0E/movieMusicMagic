@@ -84,6 +84,47 @@ input {
     margin-bottom: 5px;
 }
 
+/* Spotify Album Cover Image  */
+
+.img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-wrapper > .image-content {
+    position: absolute;
+    inset: 0;
+    font-size: 25px;
+    padding: 1rem;
+    background: rgba(255,255,255,.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+
+.img-wrapper > img,
+.img-wrapper > .image-content {
+    transition: 200ms ease-in-out;
+}
+
+.img-wrapper:hover > img.blur {
+    filter: blur(5px);
+}
+
+.img-wrapper > .image-content.fade {
+    opacity: 0;
+}
+
+.img-wrapper:hover > .image-content.fade {
+    opacity: 1;
+}
+
+/* Footer */
+
+
 /* 
 #movie-rating {
     display: flex;
