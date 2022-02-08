@@ -61,6 +61,13 @@ input {
 }
 /* Hero styling ends*/
 
+/* Search History Style Starts */
+
+#search-history-title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
 /* Search Area Style Starts*/
 #spotify-link {
     font-size: 25px;
@@ -83,9 +90,9 @@ input {
     margin-top: 30px;
     margin-bottom: 5px;
 }
+/* Search Area Style Ends*/
 
 /* Spotify Album Cover Image  */
-
 .img-wrapper {
     position: relative;
     overflow: hidden;

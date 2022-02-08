@@ -22,6 +22,7 @@ var formSubmitHandler = function (event) {
 
     movieSectionEl.classList.remove("is-hidden");
     musicSectionEl.classList.remove("is-hidden");
+    searchHistoryContainerEl.classList.add("is-hidden");
 
     // Clean up user input
     searchTerm = inputFieldEl.value.trim();
@@ -197,7 +198,8 @@ var saveSearchResults = function (movieData) {
             break;
         }
     }
-    // Only stores 3 recent searchs from user (not sure why 2 means the array length and not actual length )
+    
+    // Only stores 3 recent searchs from user 
     if (getData.length > 2) {
         getData.pop();
     }
@@ -243,14 +245,15 @@ var displaySearchHistory = function () {
     console.log(searchHistory);
 
     for (var i =0; i < searchHistory.length; i++) {
+        var searchHistoryList = document.querySelector(".search-history-list")
         var searchHistoryImage = document.querySelector("#search-history-image");
         var searchHistoryTitle = document.querySelector("#search-history-title");
         searchHistoryImage.setAttribute("src", searchHistory[i].poster);
         searchHistoryTitle.textContent = searchHistory[i].title;
 
-        searchHistoryContainerEl.appendChild(searchHistoryImage);
-        searchHistoryContainerEl.appendChild(searchHistoryTitle);
-
+        searchHistoryList.appendChild(searchHistoryImage);
+        searchHistoryList.appendChild(searchHistoryTitle);
+        searchHistoryContainerEl.appendChild(searchHistoryList);
     }
 }
 
