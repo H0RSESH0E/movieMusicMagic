@@ -66,13 +66,61 @@ input {
 #search-history-title {
     font-weight: bold;
     font-size: 20px;
+    text-align: center;
 }
+
+.img-wrapper1 {
+    position: relative;
+}
+
+.img-overlay {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.img-overlay--blur {
+    backdrop-filter: blur(5px);
+}
+.img-overlay > * {
+    transform: translateY(20px);
+    transition: transform 0.25s;
+}
+
+.img-overlay:hover {
+    opacity: 1;
+}
+
+.img-overlay:hover > * {
+    transform: translateY(0);
+}
+
+.image-icon {
+    height: 100px;
+    width: 100px;
+}
+
+.image-description {
+    font-size: 30px;
+    margin-top: 0.25rem;
+}
+
 
 /* Search Area Style Starts*/
 #spotify-link {
     font-size: 25px;
     margin: 35px;
-    position: relative;
+
 }
 #spotify-link:hover {
     opacity: 0.5;
@@ -132,6 +180,7 @@ input {
 .img-wrapper:hover > .image-content.fade {
     opacity: 1;
 }
+
 #spotify-image {
     height: 50px;
     width: 50px;

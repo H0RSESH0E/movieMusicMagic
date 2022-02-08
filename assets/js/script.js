@@ -330,6 +330,10 @@ var displaySearchHistory = function () {
         var searchHistoryList = document.querySelector(".search-history-list")
         var searchHistoryImage = document.querySelector("#search-history-image");
         var searchHistoryTitle = document.querySelector("#search-history-title");
+
+        searchHistoryList.setAttribute("href", searchHistory[i].spotifyLink);
+        searchHistoryList.setAttribute("target", "_blank");
+
         searchHistoryImage.setAttribute("src", searchHistory[i].poster);
         searchHistoryTitle.textContent = searchHistory[i].title;
 
