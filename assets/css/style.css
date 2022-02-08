@@ -132,6 +132,11 @@ input {
 .img-wrapper:hover > .image-content.fade {
     opacity: 1;
 }
+#spotify-image {
+    height: 50px;
+    width: 50px;
+}
+
 
 /* Footer */
 
