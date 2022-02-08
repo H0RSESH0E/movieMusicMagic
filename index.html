@@ -51,14 +51,39 @@
                 move to the movie magic.
             </p>
             <form id="search-form" class="search-area is-flex is-justify-content-flex-end">
-                <input type="search" placeholder="enter movie here" class="input is-normal" style="text-align:center" autofocus/>
+                <input type="search" placeholder="enter movie here" class="input is-normal" style="text-align:center"
+                    autofocus />
                 <button id="search-btn" type="submit" class="button is-dark is-normal">search</button>
             </form>
         </div>
     </main>
 
+    <!-- Search History  -->
+    <div id="display-search-history" class="is-flex is-justify-content-space-around m-4">
+        <div class="search-history-list is-flex-direction-column">
+            <h2 id="search-history-title">
+               
+            </h2>
+            <img id="search-history-image" src="">
+        </div>
+        <div class="search-history-list is-flex-direction-column">
+            <h2 id="search-history-title">
+              
+            </h2>
+            <img id="search-history-image" src="">
+        </div>
+        <div class="search-history-list is-flex-direction-column">
+            <h2 id="search-history-title">
+          
+            </h2>
+            <img id="search-history-image" src="">
+        </div>
+
+    </div>
+
     <!--search results display-->
     <section class="columns is-flex is-flex-direction-row is-one-third">
+        <!-- Search results history  -->
         <div id="movie-section"
             class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
             <h1 class="title" id="movie-title">
@@ -85,6 +110,8 @@
             </a>
         </div>
     </section>
+
+
 
     <!--footer-->
     <br><br><br>
