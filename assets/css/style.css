@@ -10,6 +10,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* Navigation Style*/
 header img {
     width: 4%;

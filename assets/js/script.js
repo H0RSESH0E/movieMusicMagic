@@ -373,8 +373,7 @@ document.querySelectorAll('.accordion-button').forEach(button => {
     button.addEventListener("click", function() {
 
         button.classList.toggle('accordion-button-active');
-
-
+        window.scroll(0, 600);
     });
 })
 // Add event listeners to search form
