@@ -336,23 +336,23 @@ var loadSavedSearches = function () {
 };
 
 var displaySearchHistory = function () {
-    console.log(searchHistory);
+    console.log("We are at 339: ", searchHistory);
 
-    for (var i =0; i < searchHistory.length; i++) {
-        var searchHistoryList = document.querySelector(".search-history-list")
-        var searchHistoryImage = document.querySelector("#search-history-image");
-        var searchHistoryTitle = document.querySelector("#search-history-title");
-
-        searchHistoryList.setAttribute("href", searchHistory[i].spotifyLink);
-        searchHistoryList.setAttribute("target", "_blank");
-
-        searchHistoryImage.setAttribute("src", searchHistory[i].poster);
-        searchHistoryTitle.textContent = searchHistory[i].title;
-
-        searchHistoryList.appendChild(searchHistoryImage);
-        searchHistoryList.appendChild(searchHistoryTitle);
-        searchHistoryContainerEl.appendChild(searchHistoryList);
-    }
+        for (var i =0; i < searchHistory.length; i++) {
+            var searchDiv = document.createElement("div");
+            searchDiv.classList.add("img-wrapper1");
+            searchDiv.innerHTML = `
+            <a class="search-history-list is-flex-direction-column is-align-items-center href="${searchHistory[i].spotifyLink} target="_blank">
+                <img id="search-history-image" src="${searchHistory[i].poster}">
+                    <h2 id="search-history-title">${searchHistory[i].title}</h2>
+                <div class="img-overlay img-overlay--blur">
+                    <img class="image-icon" src="./assets/images/Spotify_Icon_RGB_Green.png">
+                        <p class="image-description">Bring me to Spotify</p>
+                </div>
+            </a>
+            `
+            searchHistoryContainerEl.appendChild(searchDiv);
+        }
 }
 
 getSpotifyToken();
