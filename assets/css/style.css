@@ -1,7 +1,11 @@
+:root {
+    --fontfactor: 1;
+}
+
 * {
     font-family: 'Roboto Slab', serif;
     /* background-color: rgba(0, 0, 255, 0.151); */
-    /* border: 1px solid black; */
+    border: 1px solid black;
     margin: 0;
     padding: 0;
 }
@@ -35,12 +39,12 @@ header {
 }
 
 #title-hero {
-    font-size: 45px;
+    font-size: calc( var(--fontfactor) * 45px);
     font-weight: bold;
 }
 
 #subtitle-hero {
-    font-size: 30px;
+    font-size: calc( var(--fontfactor) * 30px);
     color: white;
 }
 
@@ -65,7 +69,7 @@ input {
 
 #search-history-title {
     font-weight: bold;
-    font-size: 20px;
+    font-size: calc( var(--fontfactor) * 20px);
     text-align: center;
 }
 
@@ -111,14 +115,14 @@ input {
 }
 
 .image-description {
-    font-size: 30px;
+    font-size: calc( var(--fontfactor) * 30px);
     margin-top: 0.25rem;
 }
 
 
 /* Search Area Style Starts*/
 #spotify-link {
-    font-size: 25px;
+    font-size: calc( var(--fontfactor) * 25px);
     margin: 35px;
 
 }
@@ -153,7 +157,7 @@ input {
 .img-wrapper > .image-content {
     position: absolute;
     inset: 0;
-    font-size: 25px;
+    font-size: calc( var(--fontfactor) * 25px);
     padding: 1rem;
     background: rgba(255,255,255,.4);
     display: flex;
@@ -221,35 +225,30 @@ button {
     background-color: rgb(55, 204, 50);
 }*/
 
-/* @media screen and (max-width: 960px) {
-    .body 
-    header
-    nav
-    h1
-    img
-    p {
-        width: 100%;
-    }
-}
+/* Media Q*/
 
 @media screen and (max-width: 768px) {
-    .body
-    header
-    nav
-    h1
-    img 
-    p {
-        width: 100%;
+    .hero-image {
+        position: absolute;
+        opacity: 0;
     }
-}
 
-@media screen and (max-width: 600px) {
-    .body
-    header
-    nav
-    h1
-    img
-    p  {
-        width: 100%;
+    .title, .subtitle {
+        text-align: center !important;
+        /* justify-content: flex-start; */
     }
-} */
+
+    #slogan {
+        margin: 0;
+        align-items: center;
+    }
+
+    :root {
+        --fontfactor: 0.75;
+    }
+
+    #hero-main div {
+        align-items: center !important;
+    }
+
+}
