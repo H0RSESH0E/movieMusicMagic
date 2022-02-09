@@ -113,6 +113,7 @@ input {
     height: 100px;
     width: 100px; 
 }
+/* ******************** */
 
 a.search-history-list {
     align-items: center;
@@ -126,19 +127,6 @@ a.search-history-list {
 
 
 /* Search Area Style Starts*/
-#spotify-link {
-    font-size: calc( var(--fontfactor) * 25px);
-    margin: 35px;
-
-}
-#spotify-link:hover {
-    opacity: 0.5;
-}
-
-#spotify-title {
-    padding: 2vw;
-    text-align: center;
-}
 
 .image {
     max-width: 20vw;
@@ -155,7 +143,55 @@ a.search-history-list {
 /* Search Area Style Ends*/
 
 /* Spotify Album Cover Image  */
+
 .img-wrapper {
+    position: relative;
+}
+
+.img-overlay1 {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.img-overlay1--blur {
+    backdrop-filter: blur(5px);
+}
+.img-overlay1 > * {
+    transform: translateY(20px);
+    transition: transform 0.25s;
+}
+
+.img-overlay1:hover {
+    opacity: 1;
+}
+
+.img-overlay1:hover > * {
+    transform: translateY(0);
+}
+
+#spotify-image {
+    height: 40px;
+    width: 40px;
+}
+
+.img-description1 {
+    font-size: calc( var(--fontfactor) * 20px);
+    margin-top: 0.25rem;
+    text-align: center;
+}
+
+/* .img-wrapper {
     position: relative;
 }
 
@@ -188,7 +224,7 @@ a.search-history-list {
 
 .img-wrapper:hover > .image-content.fade {
     opacity: 1;
-}
+} */
 
 #spotify-image {
     height: calc( var(--fontfactor) * 50px);
