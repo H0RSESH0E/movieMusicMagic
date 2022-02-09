@@ -25,8 +25,9 @@ var getData = [];
 // This function triggers the application to begin by capturing the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
     event.preventDefault();
-    movieSectionEl.classList.remove("is-hidden");
-    musicSectionEl.classList.remove("is-hidden");
+    console.log("Line twenty eight is running");
+    // movieSectionEl.classList.remove("is-hidden");
+    // musicSectionEl.classList.remove("is-hidden");
     searchHistoryContainerEl.classList.add("is-hidden");
 
     // Clean up user input
@@ -95,6 +96,8 @@ var displayOmdb = function (movieData) {
         websiteEl.textContent = movieData.Website;
     }
     movieDataGlobal = movieData;
+    movieSectionEl.classList.remove("is-hidden");
+
 };
 
 // This function fetches from the Open Movie Database and passes the data to the displayOmdb function
@@ -112,7 +115,8 @@ var getOmdbData = function (showName) {
                     .then(function (data) {
                         console.log(data);
                         if (data.Response === "False") {
-                            openErrorAlertModal('The server says: ' + data.Error);
+                            console.log("about to open modal with OMDB error response");
+                            openErrorAlertModal('The OMDB server says: ' + data.Error);
                         }
                         else {
                             omdbDataGlobal = data;
@@ -267,6 +271,7 @@ var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
     var soundtrackTitleToClick = document.querySelector("#spotify-title");
     soundtrackTitleToClick.textContent = soundtrackTitle;
     urlToPassGlobal = urlToPass;
+    musicSectionEl.classList.remove("is-hidden");
 
     saveSearchResults(movieDataGlobal);
 
@@ -316,7 +321,7 @@ var openErrorAlertModal = function (errorMsg) {
     modal.classList.add("is-active");
     var modalCardBody = document.querySelector(".modal-card-body");
     modalCardBody.innerHTML = `<p>Sorry.  There seems to be a problem:<br> ${errorMsg}</p>`
-    var modalClose = document.querySelector(".is-active");
+    var modalClose = document.querySelector("#modal-ID");
     modalClose.addEventListener('click', closeErrorAlertModal);
 
 };
@@ -341,7 +346,6 @@ var loadSavedSearches = function () {
 
     
 };
-
 
 var displaySearchHistory = function () {
     console.log("We are at 339: ", searchHistory);
