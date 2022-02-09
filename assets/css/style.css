@@ -5,7 +5,7 @@
 * {
     font-family: 'Roboto Slab', serif;
     /* background-color: rgba(0, 0, 255, 0.151); */
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 0;
     padding: 0;
 }
@@ -113,6 +113,52 @@ input {
     height: 100px;
     width: 100px; 
 }
+
+/* Search History Accordion Style Start */
+
+.accordion-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #333333;
+    color: #ffffff;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.accordion-button:after {
+    content: '\25be';
+    float: right;
+    transform: scale(2);
+}
+
+.accordion-button-active + .accordion-content {
+    display: block;
+}
+.accordion-button-active {
+    background: #FFA3CF; 
+}
+
+.accordion-button-active:after {
+    content: '\25b4';
+}
+
+.accordion-content {
+    /* overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s; */
+    padding: 0 15px;
+    display: none;
+    overflow: auto;
+}
+
+
+
+
 /* ******************** */
 
 a.search-history-list {

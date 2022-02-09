@@ -58,8 +58,42 @@
         </div>
     </main>
 
-    <!-- Search History  -->
-    <div id="display-search-history" class="is-flex is-justify-content-space-around m-4">
+    <!-- Search History/Accordion Section   -->
+    <div class="accordion">
+        <button type="button" class="accordion-button ">See Search History</button>
+        <div class="accordion-content">
+            <div id="display-search-history" class="is-flex is-justify-content-space-around m-4">
+                <a class="search-history-list is-flex-direction-column is-align-items-center img-wrapper1">
+                        <img id="search-history-image" src="">
+                        <h2 id="search-history-title"></h2>
+                        <div class="img-overlay img-overlay--blur">
+                            <img class="image-icon" src="./assets/images/Spotify_Icon_RGB_Green.png">
+                            <p class="image-description">Bring me to Spotify</p>
+                        </div>
+                </a>
+                <a class="search-history-list is-flex-direction-column img-wrapper1 is-align-items-center">
+                    <img id="search-history-image" src="">
+                    <h2 id="search-history-title"> </h2>
+                    <div class="img-overlay img-overlay--blur">
+                        <img class="image-icon" src="./assets/images/Spotify_Icon_RGB_Green.png">
+                        <p class="image-description">Bring me to Spotify</p>
+                    </div>
+                </a>
+                <a class="search-history-list is-flex-direction-column img-wrapper1 is-align-items-center">
+                    <img id="search-history-image" src="">
+                    <h2 id="search-history-title"> </h2>
+                    <div class="img-overlay img-overlay--blur">
+                        <img class="image-icon" src="./assets/images/Spotify_Icon_RGB_Green.png">
+                        <p class="image-description">Bring me to Spotify</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- <div id="display-search-history" class="is-flex is-justify-content-space-around m-4">
         <a class="search-history-list is-flex-direction-column is-align-items-center img-wrapper1">
                 <img id="search-history-image" src="">
                 <h2 id="search-history-title"></h2>
@@ -85,11 +119,10 @@
             </div>
         </a>
 
-    </div>
+    </div> -->
 
     <!--search results display-->
     <section class="columns is-flex is-flex-direction-row is-one-third">
-        <!-- Search results history  -->
         <div id="movie-section"
             class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
             <h1 class="title" id="movie-title">

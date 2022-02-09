@@ -16,6 +16,18 @@ var searchHistory = [];
 // Local Storage Array 
 var objectToSaveEachSearch = {};
 var getData = [];
+
+
+// Accordion Section
+document.querySelectorAll('.accordion-button').forEach(button => {
+    button.addEventListener("click", function() {
+
+        button.classList.toggle('accordion-button-active');
+
+
+    });
+})
+
 // This function triggers the application to begin by capturing the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
 
@@ -282,7 +294,7 @@ var saveSearchResults = function (movieData) {
     }
     
     // Only stores 3 recent searchs from user 
-    if (getData.length > 2) {
+    if (getData.length > 5) {
         getData.pop();
     }
 
