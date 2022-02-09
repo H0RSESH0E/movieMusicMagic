@@ -12,27 +12,19 @@ var spotifyToken;
 var searchTerm;
 var omdbDataGlobal;
 var searchHistory = [];
+var urlToPassGlobal;
+var movieDataGlobal;
 
 // Local Storage Array 
 var objectToSaveEachSearch = {};
 var getData = [];
 
 
-// Accordion Section
-document.querySelectorAll('.accordion-button').forEach(button => {
-    button.addEventListener("click", function() {
 
-        button.classList.toggle('accordion-button-active');
-
-
-    });
-})
 
 // This function triggers the application to begin by capturing the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
-
     event.preventDefault();
-
     movieSectionEl.classList.remove("is-hidden");
     musicSectionEl.classList.remove("is-hidden");
     searchHistoryContainerEl.classList.add("is-hidden");
@@ -63,7 +55,15 @@ var displayOmdb = function (movieData) {
     // Official Show Title
     var showTitleEl = document.querySelector("#movie-title");
     showTitleEl.textContent = `${movieData.Title} (${movieData.Year})`;
-    objectToSaveEachSearch.title = movieData.Title
+    var q = movieData.Title;
+    console.log(q);
+    console.log(q.length, " the q string liegth?");
+    if (q.length > 32) {
+        q = q.substring(0, 32);
+        q += " ...";
+        console.log(q, " Q has been sliced");
+    }
+    objectToSaveEachSearch.title = q;
     // Year
     objectToSaveEachSearch.year = movieData.Year;
     // Iterates through possible array of ratings 
@@ -94,8 +94,7 @@ var displayOmdb = function (movieData) {
         websiteEl.setAttribute("href", movieData.Website);
         websiteEl.textContent = movieData.Website;
     }
-
-    saveSearchResults(movieData);
+    movieDataGlobal = movieData;
 };
 
 // This function fetches from the Open Movie Database and passes the data to the displayOmdb function
@@ -182,6 +181,7 @@ var getSpotifyData = function (token, searchString) {
                             var spotifyAlbumYear = data.albums.items[0].release_date;
                             spotifyAlbumYear = spotifyAlbumYear.slice(0, 4);
                             if (omdbDataGlobal.Year === spotifyAlbumYear) {
+                                console.log("You got to this point!");
                                 displayOmdb(omdbDataGlobal);
                                 displaySpotifyData(urlToPass, albumCover, soundtrackTitle);
                             }
@@ -195,6 +195,7 @@ var getSpotifyData = function (token, searchString) {
                             unofficialSoundtrackResult(token, searchString);
 
                         }
+                        
                     });
 
             }
@@ -265,6 +266,9 @@ var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
 
     var soundtrackTitleToClick = document.querySelector("#spotify-title");
     soundtrackTitleToClick.textContent = soundtrackTitle;
+    urlToPassGlobal = urlToPass;
+
+    saveSearchResults(movieDataGlobal);
 
 };
 
@@ -282,7 +286,8 @@ var clearSpotifyData = function () {
 
 // Save users search input and results into local storage
 var saveSearchResults = function (movieData) {
-
+console.log("You are HERE!");
+console.log(urlToPassGlobal)
     // Gets saved search results from local storage or creates a new empty array
     var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
 
@@ -294,14 +299,16 @@ var saveSearchResults = function (movieData) {
     }
     
     // Only stores 3 recent searchs from user 
-    if (getData.length > 5) {
+    if (getData.length > 10) {
         getData.pop();
     }
 
-    getData.unshift(objectToSaveEachSearch);
-
-    // Sets local storage to contain latest search object
-    localStorage.setItem("moviemusicmagic", JSON.stringify(getData));
+    if (urlToPassGlobal) {
+        getData.unshift(objectToSaveEachSearch);
+        // Sets local storage to contain latest search object
+        localStorage.setItem("moviemusicmagic", JSON.stringify(getData));
+        urlToPassGlobal = "";
+    }
 };
 
 var openErrorAlertModal = function (errorMsg) {
@@ -335,16 +342,19 @@ var loadSavedSearches = function () {
     
 };
 
+
 var displaySearchHistory = function () {
     console.log("We are at 339: ", searchHistory);
 
         for (var i =0; i < searchHistory.length; i++) {
             var searchDiv = document.createElement("div");
-            searchDiv.classList.add("img-wrapper1");
+            searchDiv.classList.add("img-wrapper1", "column", "is-one-fifth");
+            searchDiv.setAttribute("style", "max-width: 5000px");
+            console.log(searchHistory[i].spotifyLink)
             searchDiv.innerHTML = `
-            <a class="search-history-list is-flex-direction-column is-align-items-center href="${searchHistory[i].spotifyLink} target="_blank">
-                <img id="search-history-image" src="${searchHistory[i].poster}">
-                    <h2 id="search-history-title">${searchHistory[i].title}</h2>
+            <a class="search-history-list is-flex is-flex-direction-column is-align-items-center" href='${searchHistory[i].spotifyLink}' target="_blank">
+                <img id="search-history-image" src="${searchHistory[i].poster}" style="max-height: 250px;">
+                    <h2 id="search-history-title" style="word-wrap: break-word;">${searchHistory[i].title}</h2>
                 <div class="img-overlay img-overlay--blur">
                     <img class="image-icon" src="./assets/images/Spotify_Icon_RGB_Green.png">
                         <p class="image-description">Bring me to Spotify</p>
@@ -357,6 +367,15 @@ var displaySearchHistory = function () {
 
 getSpotifyToken();
 loadSavedSearches();
+
+// Accordion Section
+document.querySelectorAll('.accordion-button').forEach(button => {
+    button.addEventListener("click", function() {
+
+        button.classList.toggle('accordion-button-active');
+
+
+    });
+})
 // Add event listeners to search form
 searchFormEl.addEventListener('submit', formSubmitHandler);
-searchHistoryContainerEl.addEventListener("click", loadSavedSearches)
