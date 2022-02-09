@@ -272,7 +272,7 @@ var displaySpotifyData = function (urlToPass, albumCover, soundtrackTitle) {
     soundtrackTitleToClick.textContent = soundtrackTitle;
     urlToPassGlobal = urlToPass;
     musicSectionEl.classList.remove("is-hidden");
-
+    window.scroll(0, 600);
     saveSearchResults(movieDataGlobal);
 
 };
