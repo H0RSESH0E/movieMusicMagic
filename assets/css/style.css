@@ -111,12 +111,17 @@ input {
 
 .image-icon {
     height: 100px;
-    width: 100px;
+    width: 100px; 
+}
+
+a.search-history-list {
+    align-items: center;
 }
 
 .image-description {
     font-size: calc( var(--fontfactor) * 30px);
     margin-top: 0.25rem;
+    text-align: center;
 }
 
 
@@ -186,8 +191,8 @@ input {
 }
 
 #spotify-image {
-    height: 50px;
-    width: 50px;
+    height: calc( var(--fontfactor) * 50px);
+    width: calc( var(--fontfactor) * 50px);
 }
 
 
@@ -249,6 +254,12 @@ button {
 
     #hero-main div {
         align-items: center !important;
+    }
+
+    #display-search-history {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
 }
