@@ -249,6 +249,26 @@ a.search-history-list {
 /* Footer */
 
 
+/* MODAL */
+.modal {
+    opacity: 0.9;
+
+}
+
+.modal-card-head,
+.modal-card-foot {
+background-image: url(../images/pinker.png);
+
+}
+
+.modal-card-body {
+    color: #ffffff;
+    background-color: hsl(0, 0%, 21%);
+}
+
+.is-active {
+    transition: 3s;
+}
 /* 
 #movie-rating {
     display: flex;
