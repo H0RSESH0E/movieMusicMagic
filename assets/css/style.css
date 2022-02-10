@@ -1,0 +1,334 @@
+:root {
+    --fontfactor: 1;
+}
+
+* {
+    font-family: 'Roboto Slab', serif;
+    /* background-color: rgba(0, 0, 255, 0.151); */
+    /* border: 1px solid black; */
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Navigation Style*/
+header img {
+    width: 4%;
+}
+
+header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0; 
+    background-color: white; 
+}
+
+/* Hero Style Starts */
+
+#hero-main {
+    background-size: cover;
+    background-image: url(../images/pinker.jpg)
+}
+
+#slogan {
+    margin: 0 220px 0 0;
+
+}
+
+.title, .subtitle {
+    text-align: right;
+}
+
+#title-hero {
+    font-size: calc( var(--fontfactor) * 45px);
+    font-weight: bold;
+}
+
+#subtitle-hero {
+    font-size: calc( var(--fontfactor) * 30px);
+    color: white;
+}
+
+#header-title {
+    margin: 0 0 0 150px;
+}
+
+input {
+    margin-right: 8px;
+}
+
+.button, .input {
+    position:static;
+}
+
+.search-area {
+    float: right;
+}
+/* Hero styling ends*/
+
+/* Search History Style Starts */
+
+#search-history-title {
+    font-weight: bold;
+    font-size: calc( var(--fontfactor) * 20px);
+    text-align: center;
+}
+
+.img-wrapper1 {
+    position: relative;
+}
+
+.img-overlay {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.img-overlay--blur {
+    backdrop-filter: blur(5px);
+}
+.img-overlay > * {
+    transform: translateY(20px);
+    transition: transform 0.25s;
+}
+
+.img-overlay:hover {
+    opacity: 1;
+}
+
+.img-overlay:hover > * {
+    transform: translateY(0);
+}
+
+.image-icon {
+    height: 100px;
+    width: 100px; 
+}
+
+/* Search History Accordion Style Start */
+
+.accordion-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #333333;
+    color: #ffffff;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    transition: 0.4s;
+    
+}
+
+.accordion-button:after {
+    content: '\25be';
+    float: right;
+    transform: scale(2);
+}
+
+.accordion-button-active + .accordion-content {
+    display: block;
+}
+.accordion-button-active {
+    background: #FFA3CF; 
+}
+
+.accordion-button-active:after {
+    content: '\25b4';
+}
+
+.accordion-content {
+    /* overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s; */
+    padding: 0 15px;
+    display: none;
+    overflow: auto;
+}
+
+
+
+
+/* ******************** */
+
+a.search-history-list {
+    align-items: center;
+}
+
+.image-description {
+    font-size: calc( var(--fontfactor) * 30px);
+    margin-top: 0.25rem;
+    text-align: center;
+}
+
+
+/* Search Area Style Starts*/
+
+.image {
+    max-width: 20vw;
+}
+
+
+#spotify-title {
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+/* Search Area Style Ends*/
+
+/* Spotify Album Cover Image  */
+
+.img-wrapper {
+    position: relative;
+}
+
+.img-overlay1 {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.img-overlay1--blur {
+    backdrop-filter: blur(5px);
+}
+.img-overlay1 > * {
+    transform: translateY(20px);
+    transition: transform 0.25s;
+}
+
+.img-overlay1:hover {
+    opacity: 1;
+}
+
+.img-overlay1:hover > * {
+    transform: translateY(0);
+}
+
+#spotify-image {
+    height: 40px;
+    width: 40px;
+}
+
+.img-description1 {
+    font-size: calc( var(--fontfactor) * 20px);
+    margin-top: 0.25rem;
+    text-align: center;
+}
+
+#spotify-image {
+    height: calc( var(--fontfactor) * 50px);
+    width: calc( var(--fontfactor) * 50px);
+}
+
+
+/* Footer */
+
+
+/* MODAL */
+.modal {
+    opacity: 0.9;
+}
+
+.modal-card-head,
+.modal-card-foot {
+background-image: url(../images/pinker.png);
+
+}
+
+.modal-card-body {
+    color: #ffffff;
+    background-color: hsl(0, 0%, 21%);
+}
+
+.is-active {
+    transition: 3s;
+}
+/* 
+#movie-rating {
+    display: flex;
+    flex-direction: column;
+} */
+
+
+/* Footer Style Starts*/
+
+
+/* Styling Aid
+#first-div {
+    background-color: rgba(165, 42, 42, 0.226);
+}
+
+#second-div {
+    background-color: rgba(63, 165, 42, 0.226);
+}
+
+h1 {
+    background-color: rgba(100, 148, 237, 0.356);
+}
+
+button {
+    background-color: rgba(55, 0, 100, 0.342);
+}
+
+/* nav { 
+    background-color: rgb(55, 204, 50);
+}*/
+
+/* Media Q*/
+
+@media screen and (max-width: 768px) {
+    .hero-image {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .title, .subtitle {
+        text-align: center !important;
+        /* justify-content: flex-start; */
+    }
+
+    #slogan {
+        margin: 0;
+        align-items: center;
+    }
+
+    :root {
+        --fontfactor: 0.75;
+    }
+
+    #hero-main div {
+        align-items: center !important;
+    }
+
+    #display-search-history {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}

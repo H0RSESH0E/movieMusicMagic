@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/10c12bd92a.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="./assets/images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
+        integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Movie Music Magic</title>
+</head>
+
+<body class="has-navbar-fixed-top">
+    <!-- navigation -->
+    <nav class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <img src="./assets/images/PinkElephantLogo.png" width="50" height="10" class="ml-2" />
+                <h3 class="title is-5 mt-4">&nbsp;&nbsp;MovieMusicMagic</h3>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <a href="https://www.spotify.com/ca-en/" target="_blank">
+                            <img src="./assets/images/Spotify_Icon_Black.png" width="30" height="10" class="mr-2" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--hero/jumbotron-->
+    <main class="columns" id="hero-main">
+        <div class="column is-flex is-flex-direction-row is-justify-content-end is-one-third is-align-items-center">
+            <img class="hero-image" src="./assets/images/HeroImage1.png" alt="" style="width: 50%; height: 100%;">
+        </div>
+        <div class="column is-two-third is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-end"
+            id="slogan">
+            <p class="title" id="title-hero">
+                Welcome to Movie Music Magic
+            </p>
+            <p class="subtitle" id="subtitle-hero">
+                melodies of life
+            </p>
+            <form id="search-form" class="search-area is-flex is-justify-content-flex-end">
+                <input type="search" placeholder="enter movie here" class="input is-normal" style="text-align:center"
+                    autofocus />
+                <button id="search-btn" type="submit" class="button is-dark is-normal">search</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Search History/Accordion Section   -->
+    <div class="accordion">
+        <button type="button" class="accordion-button">See Search History</button>
+        <div class="accordion-content container">
+            <div id="display-search-history" class="columns is-flex is-justify-content-space-around is-flex-wrap-wrap m-4">
+            <!-- search history dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+
+    <!--search results display-->
+    <section class="columns is-flex is-flex-direction-row is-one-third">
+        <div id="movie-section"
+            class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
+            <h1 class="title" id="movie-title">
+
+            </h1>
+            <figure class="image">
+                <img id="movieImage" src="./assets/images/placeholder-image.png">
+            </figure> <br>
+            <p id="movie-rating">
+
+            </p>
+            <p id="movie-website"></p>
+        </div>
+        <div id="music-section"
+            class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
+            <h1 class="title is-5" id="spotify-title"></h1>
+            <a id="spotify-link" class="image img-wrapper">
+                    <img id="musicImage" src="./assets/images/placeholder-image.png">
+                    <div class="img-overlay1 img-overlay1--blur is-flex-direction-column">
+                        <img id="spotify-image" src="./assets/images/Spotify_Icon_RGB_Green.png">
+                        <p class="img-description1">Bring me to Spotify</p>
+                    </div>
+            </a>
+        </div>
+    </section>
+
+    <!--footer-->
+    <br><br><br>
+    <footer class="columns is-flex is-justify-content-center m-2">
+        <p>
+            &copy; The Pink Elephants 2022
+        </p>
+    </footer>
+
+    <!-- Modal alerts -->
+
+    <div id="modal-ID" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Oops!</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <p>Communication with the server was interupted. Please check your search term and connection and try
+                    again.</p>
+            </section>
+            <footer class="modal-card-foot">
+                <p></p>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
