@@ -19,16 +19,12 @@ var movieDataGlobal;
 var objectToSaveEachSearch = {};
 var getData = [];
 
-
-
-
 // This function triggers the application to begin by capturing the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
     event.preventDefault();
-    console.log("Line twenty eight is running");
-    // movieSectionEl.classList.remove("is-hidden");
-    // musicSectionEl.classList.remove("is-hidden");
-    searchHistoryContainerEl.classList.add("is-hidden");
+    
+    movieSectionEl.classList.remove("is-hidden");
+    musicSectionEl.classList.remove("is-hidden");
 
     // Clean up user input
     searchTerm = inputFieldEl.value.trim();
@@ -44,6 +40,8 @@ var formSubmitHandler = function (event) {
     else {
         openErrorAlertModal("That does not appear to be a valid search term.");
     }
+    window.scroll(0, 2000);
+
 };
 
 // This function appends the dynamically created elements to the page
@@ -286,8 +284,9 @@ var clearSpotifyData = function () {
     albumCoverToClick.setAttribute("src", "");
 
     var soundtrackTitleToClick = document.querySelector("#spotify-title");
+    soundtrackTitleToClick.setAttribute("class", )
     soundtrackTitleToClick.textContent = "Sorry.  There is no official original motion picture soundtrack or matching unofficial soundtrack playlist.";
-}
+};
 
 // Save users search input and results into local storage
 var saveSearchResults = function (movieData) {
@@ -304,7 +303,7 @@ console.log(urlToPassGlobal)
     }
     
     // Only stores 3 recent searchs from user 
-    if (getData.length > 10) {
+    if (getData.length > 9) {
         getData.pop();
     }
 
@@ -350,6 +349,8 @@ var loadSavedSearches = function () {
 var displaySearchHistory = function () {
     console.log("We are at 339: ", searchHistory);
 
+        searchHistoryContainerEl.innerHTML = "";
+
         for (var i =0; i < searchHistory.length; i++) {
             var searchDiv = document.createElement("div");
             searchDiv.classList.add("img-wrapper1", "column", "is-one-fifth");
@@ -370,15 +371,20 @@ var displaySearchHistory = function () {
 }
 
 getSpotifyToken();
-loadSavedSearches();
 
 // Accordion Section
 document.querySelectorAll('.accordion-button').forEach(button => {
     button.addEventListener("click", function() {
 
+        loadSavedSearches();
+
         button.classList.toggle('accordion-button-active');
         window.scroll(0, 600);
+
     });
 })
+
+
+
 // Add event listeners to search form
 searchFormEl.addEventListener('submit', formSubmitHandler);

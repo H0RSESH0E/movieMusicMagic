@@ -58,22 +58,11 @@
         </div>
     </main>
 
-    <!-- Search History/Accordion Section   -->
-    <div class="accordion">
-        <button type="button" class="accordion-button">See Search History</button>
-        <div class="accordion-content container">
-            <div id="display-search-history" class="columns is-flex is-justify-content-space-around is-flex-wrap-wrap m-4">
-            <!-- search history dynamically populated -->
-            </div>
-        </div>
-    </div>
-
-
     <!--search results display-->
     <section class="columns is-flex is-flex-direction-row is-one-third">
         <div id="movie-section"
             class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
-            <h1 class="title" id="movie-title">
+            <h1 class="title is-justify-content-center" id="movie-title">
 
             </h1>
             <figure class="image">
@@ -86,16 +75,27 @@
         </div>
         <div id="music-section"
             class="column is-half is-flex is-flex-wrap-wrap is-flex-direction-column is-justify-content-center is-align-items-center is-hidden">
-            <h1 class="title is-5" id="spotify-title"></h1>
+            <h1 class="title is-5 is-justify-content-center" id="spotify-title"></h1>
             <a id="spotify-link" class="image img-wrapper">
-                    <img id="musicImage" src="./assets/images/placeholder-image.png">
-                    <div class="img-overlay1 img-overlay1--blur is-flex-direction-column">
-                        <img id="spotify-image" src="./assets/images/Spotify_Icon_RGB_Green.png">
-                        <p class="img-description1">Bring me to Spotify</p>
-                    </div>
+                <img id="musicImage" src="./assets/images/placeholder-image.png">
+                <div class="img-overlay1 img-overlay1--blur is-flex-direction-column">
+                    <img id="spotify-image" src="./assets/images/Spotify_Icon_RGB_Green.png">
+                    <p class="img-description1">Bring me to Spotify</p>
+                </div>
             </a>
         </div>
     </section>
+
+    <!-- Search History/Accordion Section   -->
+    <div class="accordion">
+        <button type="button" class="accordion-button">See Search History</button>
+        <div class="accordion-content container">
+            <div id="display-search-history"
+                class="columns is-flex is-justify-content-space-around is-flex-wrap-wrap m-4">
+                <!-- search history dynamically populated -->
+            </div>
+        </div>
+    </div>
 
     <!--footer-->
     <br><br><br>
