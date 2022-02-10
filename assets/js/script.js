@@ -19,9 +19,6 @@ var movieDataGlobal;
 var objectToSaveEachSearch = {};
 var getData = [];
 
-
-
-
 // This function triggers the application to begin by capturing the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -374,7 +371,15 @@ document.querySelectorAll('.accordion-button').forEach(button => {
 
         button.classList.toggle('accordion-button-active');
         window.scroll(0, 600);
+
+        // reloadSearchHistory();
     });
 })
+
+// var reloadSearchHistory = function() {
+
+//     if ()
+// };
+
 // Add event listeners to search form
 searchFormEl.addEventListener('submit', formSubmitHandler);

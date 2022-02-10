@@ -154,16 +154,10 @@ input {
 }
 
 .accordion-content {
-    /* overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.2s; */
     padding: 0 15px;
     display: none;
     overflow: auto;
 }
-
-
-
 
 /* ******************** */
 
