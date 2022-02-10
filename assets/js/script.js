@@ -104,7 +104,7 @@ var displayOmdb = function (movieData) {
 var getOmdbData = function (showName) {
 
     // OMDb API 
-    var apiUrl = `http://www.omdbapi.com/?apikey=eb60e924&t=${showName}`;
+    var apiUrl = `https://www.omdbapi.com/?apikey=eb60e924&t=${showName}`;
     // FOR TESTING: openErrorAlertModal('Error: ' + searchTerm);
     // make a get request to url
     fetch(apiUrl)
