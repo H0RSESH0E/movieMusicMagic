@@ -163,7 +163,7 @@ var getSpotifyToken = function () {
 var getSpotifyData = function (token, searchString) {
 
     // Get Spotify API soundtrack data 
-    var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString + ' Original%20Motion%20Picture&type=album';
+    var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString + ' Motion%20Picture&type=album';
 
     fetch(spotifyApiUrl, {
         method: 'GET',
