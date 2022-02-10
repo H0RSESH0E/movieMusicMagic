@@ -299,7 +299,7 @@ console.log(urlToPassGlobal)
     var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
 
     for (var i = 0; i < getData.length; i++) {
-        if (getData[i].title === movieData.Title) {
+        if (getData[i].title === movieData.Title && getData[i].year === movieData.Year) {
             getData.splice(i, 1);
             break;
         }
