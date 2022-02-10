@@ -1,5 +1,6 @@
 var searchFormEl = document.querySelector("#search-form");
-var inputFieldEl = document.querySelector("input");
+var inputFieldEl = document.querySelector("#input-search-term");
+var inputFieldYearEl = document.querySelector("#input-year");
 var movieSectionEl = document.querySelector("#movie-section");
 var musicSectionEl = document.querySelector("#music-section");
 var searchHistoryContainerEl = document.querySelector("#display-search-history");
@@ -10,6 +11,7 @@ var submitButton = document.querySelector("#search-btn");
 // Global Variable Declarations
 var spotifyToken;
 var searchTerm;
+var searchYear;
 var omdbDataGlobal;
 var searchHistory = [];
 var urlToPassGlobal;
@@ -28,13 +30,14 @@ var formSubmitHandler = function (event) {
 
     // Clean up user input
     searchTerm = inputFieldEl.value.trim();
-
+    searchYear = inputFieldYearEl.value.trim();
     // Clear old content
     inputFieldEl.value = '';
+    inputFieldYearEl.value = '';
 
     // This comment is pointless
     if (searchTerm) {
-        getOmdbData(searchTerm);
+        getOmdbData(searchTerm, searchYear);
         // getSpotifyData(spotifyToken, searchTerm)
     }
     else {
@@ -99,10 +102,10 @@ var displayOmdb = function (movieData) {
 };
 
 // This function fetches from the Open Movie Database and passes the data to the displayOmdb function
-var getOmdbData = function (showName) {
+var getOmdbData = function (showName, showYear) {
 
     // OMDb API 
-    var apiUrl = `https://www.omdbapi.com/?apikey=eb60e924&t=${showName}`;
+    var apiUrl = `https://www.omdbapi.com/?apikey=eb60e924&t=${showName}&y=${showYear}`;
     // FOR TESTING: openErrorAlertModal('Error: ' + searchTerm);
     // make a get request to url
     fetch(apiUrl)
