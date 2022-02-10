@@ -60,6 +60,14 @@ input {
     margin-right: 8px;
 }
 
+#input-search-term.input {
+    width: 65%;
+}
+
+#input-year.input {
+    width: 35%;
+}
+
 .button, .input {
     position:static;
 }
