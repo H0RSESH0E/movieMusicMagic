@@ -29,6 +29,7 @@ header {
 /* Hero Style Starts */
 
 #hero-main {
+    height: min-content;
     background-size: cover;
     background-image: url(../images/pinker.jpg)
 }
@@ -131,6 +132,7 @@ input {
 .accordion-button {
     display: block;
     width: 100%;
+    margin-top: 2px;
     padding: 15px;
     border: none;
     outline: none;
