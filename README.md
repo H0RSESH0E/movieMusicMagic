@@ -73,8 +73,7 @@ See it online now at: [https://h0rsesh0e.github.io/movieMusicMagic/]
 This is our first group project in the Coding Boot Camp provided by [The School of Continuing Studies, University of Toronto](https://learn.utoronto.ca/) and [Trilogy Education Services](https://www.trilogyed.com/). Thanks to Chris, German and Adam for all of their help during this project. 
 
 ## License
-All content excluding typefaces, registered trade marks and the publicly licensed background image is the exclusive property of The Pink Elephants and or Tirlogy Education Services and or The School of Continuing Studies, University of Toronto.
-- get license from Amanda
+All content excluding typefaces, registered trade marks and licensed components of the hero image are the exclusive property of The Pink Elephants and or Tirlogy Education Services and or The School of Continuing Studies, University of Toronto.
 
 ## Features
 Movie Music Magic features a unique and user-friendly interface for a quick and easy search of your favorite movie soundtrack. 
