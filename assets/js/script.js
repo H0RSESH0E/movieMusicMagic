@@ -4,6 +4,7 @@ var inputFieldYearEl = document.querySelector("#input-year");
 var movieSectionEl = document.querySelector("#movie-section");
 var musicSectionEl = document.querySelector("#music-section");
 var searchHistoryContainerEl = document.querySelector("#display-search-history");
+var genresContainerEl = document.querySelector("#display-genres");
 
 // Submit Button element creation 
 var submitButton = document.querySelector("#search-btn");
@@ -16,6 +17,8 @@ var omdbDataGlobal;
 var searchHistory = [];
 var urlToPassGlobal;
 var movieDataGlobal;
+var tmdbApiKey = "1badb36dd1e73a2db9c9cf89b7d585fb";
+var movieListByGenre = {};
 
 // Local Storage Array 
 var objectToSaveEachSearch = {};
@@ -373,19 +376,188 @@ var displaySearchHistory = function () {
         }
 }
 
+
+// Load genres on page 
+
+var popGenres = function(genre, genreId) {
+    var genresDiv = document.createElement("div");
+    genresDiv.setAttribute("id", "genres-accordion");
+    genresDiv.classList.add("accordion")
+
+
+    genresDiv.innerHTML = `
+        
+            <button id="${genre}-btn" type="button" class="accordion-button">${genre}</button>
+            <div class="accordion-content container">
+                <div id="display-genre"
+                    class="columns is-flex is-justify-content-space-around is-flex-wrap-wrap m-4">
+                    <!-- genres dynamically populated -->
+                </div>
+            </div>
+        
+    `
+    getMovieNamesForGenresTmdb(genre, genreId)
+    genresContainerEl.appendChild(genresDiv)
+}
+
+
+var getGenresContentOmdb = function (movieTitle) {
+
+    var apiUrl = `https://www.omdbapi.com/?apikey=eb60e924&t=${showName}&y=${showYear}`;
+    // FOR TESTING: openErrorAlertModal('Error: ' + searchTerm);
+    // make a get request to url
+    fetch(apiUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json()
+                    .then(function (data) {
+                        console.log(data);
+                        if (data.Response === "False") {
+                            console.log("about to open modal with OMDB error response");
+                            openErrorAlertModal('The OMDB server says: ' + data.Error);
+                        }
+                        else {
+                            omdbDataGlobal = data;
+                            getSpotifyData(spotifyToken, searchTerm)
+
+                        }
+                    });
+            } else {
+                openErrorAlertModal('Error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            openErrorAlertModal("Please check your connection settings. " + error);
+        });
+
+}
+
+
+
+
+var getGenresTmdb = function () {
+
+
+    var apiUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${tmdbApiKey}&language=en-US`;
+    var genresArray = [];
+    fetch(apiUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json()
+                    .then(function (data) {
+                        console.log("414", data);
+                        genresArray = data.genres;
+                        console.log("416", genresArray);
+                            for (var i = 0; i < genresArray.length; i++) {
+                                popGenres(genresArray[i].name,genresArray[i].id);
+                                // getGenresContentOmdb();
+                                
+                            }                        
+                    });
+            } else {
+                openErrorAlertModal('Error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            openErrorAlertModal("Please check your connection settings. " + error);
+        });
+
+
+
+
+    
+};
+
+
+var getMovieNamesForGenresTmdb = function (genre, genresId) {
+
+    var genresObject = {};
+    // genresObject[genre]
+
+    // https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
+    
+    var apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${tmdbApiKey}&with_genres=${genresId}&language=en-US`;
+    var genreArray = [];
+    fetch(apiUrl)
+        .then(function (response) {
+            // request was successful
+            if (response.ok) {
+                response.json()
+                    .then(function (data) {
+                        console.log("486", data);
+                        genreArray = data.results;
+                        console.log("488", genreArray[1].title);
+                        console.log("genres array length", genreArray.length)
+                        console.log("The OBJECT before", movieListByGenre);                
+                        for (var i = 0; i < (genreArray.length - 19) ; i++) {
+                                movieListByGenre.BobbyFisher;
+
+                            }   
+                            console.log("The OBJECT after", movieListByGenre);                
+                    });
+            } else {
+                openErrorAlertModal('Error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            openErrorAlertModal("Please check your connection settings. " + error);
+        });
+
+
+
+}
+
+// var displaySearchHistory = function () {
+//     console.log("We are at 339: ", searchHistory);
+
+//         searchHistoryContainerEl.innerHTML = "";
+
+//         for (var i =0; i < searchHistory.length; i++) {
+//             var searchDiv = document.createElement("div");
+//             searchDiv.classList.add("img-wrapper1", "column", "is-one-fifth");
+//             searchDiv.setAttribute("style", "max-width: 5000px");
+//             console.log(searchHistory[i].spotifyLink)
+//             searchDiv.innerHTML = `
+//             <a class="search-history-list is-flex is-flex-direction-column is-align-items-center" href='${searchHistory[i].spotifyLink}' target="_blank">
+//                 <img id="search-history-image" src="${searchHistory[i].poster}" style="max-height: 250px;">
+//                     <h2 id="search-history-title" style="word-wrap: break-word;">${searchHistory[i].title}</h2>
+//                 <div class="img-overlay img-overlay--blur">
+//                     <img class="image-icon" src="./assets/images/Spotify_Icon_RGB_Green.png">
+//                         <p class="image-description">Bring me to Spotify</p>
+//                 </div>
+//             </a>
+//             `
+//             searchHistoryContainerEl.appendChild(searchDiv);
+//         }
+// }
+
+
+
+
 getSpotifyToken();
 
 // Accordion Section
-document.querySelectorAll('.accordion-button').forEach(button => {
-    button.addEventListener("click", function() {
+document.querySelectorAll('.accordion').forEach(div => {
+    div.addEventListener("click", function(event) {
+        console.log(event.target.id)
 
+
+        if (event.target.id === "search-history-btn") {
         loadSavedSearches();
-
-        button.classList.toggle('accordion-button-active');
+        }
+        else if (event.target.id === "genres-btn") {
+            getGenresTmdb();
+        }
+        console.log("which button? -", div);
+        event.target.classList.toggle('accordion-button-active');
         window.scroll(0, 600);
 
     });
 })
+
+
 
 
 
