@@ -1,5 +1,6 @@
 var searchFormEl = document.querySelector("#search-form");
-var inputFieldEl = document.querySelector("input");
+var inputFieldEl = document.querySelector("#input-search-term");
+var inputFieldYearEl = document.querySelector("#input-year");
 var movieSectionEl = document.querySelector("#movie-section");
 var musicSectionEl = document.querySelector("#music-section");
 var searchHistoryContainerEl = document.querySelector("#display-search-history");
@@ -10,6 +11,7 @@ var submitButton = document.querySelector("#search-btn");
 // Global Variable Declarations
 var spotifyToken;
 var searchTerm;
+var searchYear;
 var omdbDataGlobal;
 var searchHistory = [];
 var urlToPassGlobal;
@@ -19,31 +21,30 @@ var movieDataGlobal;
 var objectToSaveEachSearch = {};
 var getData = [];
 
-
-
-
 // This function triggers the application to begin by capturing the user search criteria and resets the input field
 var formSubmitHandler = function (event) {
     event.preventDefault();
-    console.log("Line twenty eight is running");
-    // movieSectionEl.classList.remove("is-hidden");
-    // musicSectionEl.classList.remove("is-hidden");
-    searchHistoryContainerEl.classList.add("is-hidden");
+    
+    movieSectionEl.classList.remove("is-hidden");
+    musicSectionEl.classList.remove("is-hidden");
 
     // Clean up user input
     searchTerm = inputFieldEl.value.trim();
-
+    searchYear = inputFieldYearEl.value.trim();
     // Clear old content
     inputFieldEl.value = '';
+    inputFieldYearEl.value = '';
 
     // This comment is pointless
     if (searchTerm) {
-        getOmdbData(searchTerm);
+        getOmdbData(searchTerm, searchYear);
         // getSpotifyData(spotifyToken, searchTerm)
     }
     else {
         openErrorAlertModal("That does not appear to be a valid search term.");
     }
+    window.scroll(0, 2000);
+
 };
 
 // This function appends the dynamically created elements to the page
@@ -101,10 +102,10 @@ var displayOmdb = function (movieData) {
 };
 
 // This function fetches from the Open Movie Database and passes the data to the displayOmdb function
-var getOmdbData = function (showName) {
+var getOmdbData = function (showName, showYear) {
 
     // OMDb API 
-    var apiUrl = `https://www.omdbapi.com/?apikey=eb60e924&t=${showName}`;
+    var apiUrl = `https://www.omdbapi.com/?apikey=eb60e924&t=${showName}&y=${showYear}`;
     // FOR TESTING: openErrorAlertModal('Error: ' + searchTerm);
     // make a get request to url
     fetch(apiUrl)
@@ -163,7 +164,7 @@ var getSpotifyToken = function () {
 var getSpotifyData = function (token, searchString) {
 
     // Get Spotify API soundtrack data 
-    var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString + ' Original%20Motion%20Picture&type=album';
+    var spotifyApiUrl = 'https://api.spotify.com/v1/search?q=' + searchString + ' Motion%20Picture&type=album';
 
     fetch(spotifyApiUrl, {
         method: 'GET',
@@ -286,8 +287,9 @@ var clearSpotifyData = function () {
     albumCoverToClick.setAttribute("src", "");
 
     var soundtrackTitleToClick = document.querySelector("#spotify-title");
+    soundtrackTitleToClick.setAttribute("class", )
     soundtrackTitleToClick.textContent = "Sorry.  There is no official original motion picture soundtrack or matching unofficial soundtrack playlist.";
-}
+};
 
 // Save users search input and results into local storage
 var saveSearchResults = function (movieData) {
@@ -297,14 +299,14 @@ console.log(urlToPassGlobal)
     var getData = JSON.parse(localStorage.getItem("moviemusicmagic")) || [];
 
     for (var i = 0; i < getData.length; i++) {
-        if (getData[i].title === movieData.Title) {
+        if (getData[i].title === movieData.Title && getData[i].year === movieData.Year) {
             getData.splice(i, 1);
             break;
         }
     }
     
     // Only stores 3 recent searchs from user 
-    if (getData.length > 10) {
+    if (getData.length > 9) {
         getData.pop();
     }
 
@@ -350,6 +352,8 @@ var loadSavedSearches = function () {
 var displaySearchHistory = function () {
     console.log("We are at 339: ", searchHistory);
 
+        searchHistoryContainerEl.innerHTML = "";
+
         for (var i =0; i < searchHistory.length; i++) {
             var searchDiv = document.createElement("div");
             searchDiv.classList.add("img-wrapper1", "column", "is-one-fifth");
@@ -370,15 +374,20 @@ var displaySearchHistory = function () {
 }
 
 getSpotifyToken();
-loadSavedSearches();
 
 // Accordion Section
 document.querySelectorAll('.accordion-button').forEach(button => {
     button.addEventListener("click", function() {
 
+        loadSavedSearches();
+
         button.classList.toggle('accordion-button-active');
         window.scroll(0, 600);
+
     });
 })
+
+
+
 // Add event listeners to search form
 searchFormEl.addEventListener('submit', formSubmitHandler);
